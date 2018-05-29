@@ -104,10 +104,31 @@ The major difference between Heap and Stack memory are:
 | Lifetime	| Exists until the end of execution of the thread.	| Heap memory lives from the start till the end of application execution. |
 | Usage |	Stack memory only contains local primitive and reference variables to objects in heap space. |	Whenever an object is created, it’s always stored in the Heap space. |
 
+## 9. What is Polymorphism?
+
+If you think about the Greek roots of the term, it should become obvious.
+
+* Poly = many: polygon = many-sided, polystyrene = many styrenes (a), polyglot = many languages, and so on.
+* Morph = change or form: morphology = study of biological form, Morpheus = the Greek god of dreams able to take any form.
+So polymorphism is the ability (in programming) to present the same interface for differing underlying forms (data types).
+
+For example, in many languages, integers and floats are implicitly polymorphic since you can add, subtract, multiply and so on, irrespective of the fact that the types are different. They're rarely considered as objects in the usual term.
+
+But, in that same way, a class like BigDecimal or Rational or Imaginary can also provide those operations, even though they operate on different data types.
+
+The classic example is the Shape class and all the classes that can inherit from it (square, circle, dodecahedron, irregular polygon, splat and so on).
+
+With polymorphism, each of these classes will have different underlying data. A point shape needs only two co-ordinates (assuming it's in a two-dimensional space of course). A circle needs a center and radius. A square or rectangle needs two co-ordinates for the top left and bottom right corners and (possibly) a rotation. An irregular polygon needs a series of lines.
+
+By making the class responsible for its code as well as its data, you can achieve polymorphism. In this example, every class would have its own Draw() function and the client code could simply do:
+
+shape.Draw()
+to get the correct behavior for any shape.
+
+This is in contrast to the old way of doing things in which the code was separate from the data, and you would have had functions such as drawSquare() and drawCircle().
 
 ### __Easy ones but worth mentioning:__ 
 
 * Explain public static void main(String args[])
 * Why Java is platform independent?
 * What are constructors in Java?
-* 
