@@ -14,6 +14,19 @@ __JDK(Java Development Kit)__ : It is the tool necessary to compile, document an
 
 Refer to this below image and understand how exactly these components reside: ![java](https://cdn-images-1.medium.com/max/1600/0*MsGzRuN1Q09dOkwi.png)
 
+## 2. Is Java a Compiled or an Interpreted programming language ?
 
+Java implementations typically use a two-step compilation process. Java source code is compiled down to bytecode by the Java compiler. The bytecode is executed by a Java Virtual Machine (JVM). Modern JVMs use a technique called Just-in-Time (JIT) compilation to compile the bytecode to native instructions understood by hardware CPU on the fly at runtime.
 
+Some implementations of JVM may choose to interpret the bytecode instead of JIT compiling it to machine code, and running it directly. While this is still considered an "interpreter," It's quite different from interpreters that read and execute the high level source code (i.e. in this case, Java source code is not interpreted directly, the bytecode, output of Java compiler, is.)
 
+It is technically possible to compile Java down to native code ahead-of-time and run the resulting binary. It is also possible to interpret the Java code directly.
+
+To summarize, depending on the execution environment, bytecode can be:
+
+* compiled ahead of time and executed as native code (similar to most C++ compilers)
+* compiled just-in-time and executed
+* interpreted
+* directly executed by a supported processor (bytecode is the native instruction set of some CPUs)
+
+![java](http://novtopro.qiniudn.com/blog/2017/01/21/kotlin-kickstart/jit.png)
