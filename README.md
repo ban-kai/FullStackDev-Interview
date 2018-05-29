@@ -93,6 +93,16 @@ Equals() method is defined in Object class in Java and used for checking equalit
 * If no parent classes have provided an override, then it defaults to the method from the ultimate parent class, Object, and so you're left with the Object#equals(Object o) method. Per the Object API this is the same as ==; that is, it returns true if and only if both variables refer to the same object, if their references are one and the same. Thus you will be testing for object equality and not functional equality.
 * Always remember to override hashCode if you override equals so as not to "break the contract". As per the API, the result returned from the hashCode() method for two objects must be the same if their equals methods show that they are equivalent. The converse is not necessarily true.
 
+## 8. What are the differences between Heap and Stack Memory?
+The major difference between Heap and Stack memory are:
+
+|Features	| Stack |	Heap |
+|-----------| -------| ------|
+|Memory	| Stack memory is used only by one thread of execution.	| Heap memory is used by all the parts of the application.|
+| Access |	Stack memory can’t be accessed by other threads. |	Objects stored in the heap are globally accessible. |
+| Memory Management	| Follows LIFO manner to free memory. |	Memory management is based on generation associated to each object. |
+| Lifetime	| Exists until the end of execution of the thread.	| Heap memory lives from the start till the end of application execution. |
+| Usage |	Stack memory only contains local primitive and reference variables to objects in heap space. |	Whenever an object is created, it’s always stored in the Heap space. |
 
 
 ### __Easy ones but worth mentioning:__ 
