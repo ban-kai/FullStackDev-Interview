@@ -1,4 +1,4 @@
-# java-questions
+# Java Interview Questions Compilation
 
 ## 1. Explain JVM, JRE and JDK?
 
