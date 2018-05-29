@@ -73,10 +73,29 @@ class Singleton
 }
 ```
 
-## 6. 
+## 6. What is the difference between Array list and vector?
+
+|Array List	| Vector |
+| ---------- | -------|
+|Array List is not synchronized. | Vector is synchronized. |
+|Array List is fast as it’s non-synchronized. | Vector is slow as it is thread safe. |
+|If an element is inserted into the Array List, it increases its Array size by 50%.	|Vector defaults to doubling size of its array. |
+|Array List does not define the increment size.	| Vector defines the increment size. |
+|Array List can only use Iterator for traversing an Array List.	| Except Hashtable, Vector is the only other class which uses both Enumeration and Iterator. |
+
+## 7.  What is the difference between equals() and == ?
+
+Equals() method is defined in Object class in Java and used for checking equality of two objects defined by business logic.
+“==” or equality operator in Java is a binary operator provided by Java programming language and used to compare primitives and objects. public boolean equals(Object o) is the method provided by the Object class. The default implementation uses == operator to compare two objects. For example: method can be overridden like String class. equals() method is used to compare the values of two objects.
+
+* .equals(...) will only compare what it is written to compare, no more, no less.
+* If a class does not override the equals method, then it defaults to the equals(Object o) method of the closest parent class that has overridden this method.
+* If no parent classes have provided an override, then it defaults to the method from the ultimate parent class, Object, and so you're left with the Object#equals(Object o) method. Per the Object API this is the same as ==; that is, it returns true if and only if both variables refer to the same object, if their references are one and the same. Thus you will be testing for object equality and not functional equality.
+* Always remember to override hashCode if you override equals so as not to "break the contract". As per the API, the result returned from the hashCode() method for two objects must be the same if their equals methods show that they are equivalent. The converse is not necessarily true.
 
 
-Easy ones but worth mentioing: 
+
+### __Easy ones but worth mentioning:__ 
 
 * Explain public static void main(String args[])
 * Why Java is platform independent?
