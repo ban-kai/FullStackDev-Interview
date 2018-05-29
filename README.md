@@ -22,6 +22,8 @@ Some implementations of JVM may choose to interpret the bytecode instead of JIT 
 
 It is technically possible to compile Java down to native code ahead-of-time and run the resulting binary. It is also possible to interpret the Java code directly.
 
+At run time, JVM interprets the byte code and executes them. However, a full interpreter based execution potentially hurts the performance of application since pretty much everything that a compiler could have done upfront at compile time will now be done repeatedly by the interpreter and this adds to the overall execution time of the program.
+
 To summarize, depending on the execution environment, bytecode can be:
 
 * compiled ahead of time and executed as native code (similar to most C++ compilers)
@@ -30,3 +32,53 @@ To summarize, depending on the execution environment, bytecode can be:
 * directly executed by a supported processor (bytecode is the native instruction set of some CPUs)
 
 ![java](http://novtopro.qiniudn.com/blog/2017/01/21/kotlin-kickstart/jit.png)
+
+## 3. Why java is not 100% Object-oriented?
+
+Java is not 100% Object-oriented because it makes use of eight primitive datatypes such as boolean, byte, char, int, float, double, long, short which are not objects.
+
+## 4. What are wrapper classes?
+
+Wrapper classes converts the java primitives into the reference types (objects). Every primitive data type has a class dedicated to it. These are known as wrapper classes because they “wrap” the primitive data type into an object of that class. Refer to the below image which displays different primitive type, wrapper class and constructor argument. 
+
+## 5. What is singleton class and how can we make a class singleton?
+
+Singleton class is a class whose only one instance can be created at any given time, in one JVM. A class can be made singleton by making its constructor private.
+
+```java
+// Java program implementing Singleton class
+// with getInstance() method
+class Singleton
+{
+    // static variable single_instance of type Singleton
+    private static Singleton single_instance = null;
+ 
+    // variable of type String
+    public String s;
+ 
+    // private constructor restricted to this class itself
+    private Singleton()
+    {
+        s = "Hello I am a string part of Singleton class";
+    }
+ 
+    // static method to create instance of Singleton class
+    public static Singleton getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new Singleton();
+ 
+        return single_instance;
+    }
+}
+```
+
+## 6. 
+
+
+Easy ones but worth mentioing: 
+
+* Explain public static void main(String args[])
+* Why Java is platform independent?
+* What are constructors in Java?
+* 
