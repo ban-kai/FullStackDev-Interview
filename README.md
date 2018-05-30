@@ -11,6 +11,7 @@
 9. [What is Polymorphism?](#9-what-is-polymorphism)
 10. [What are the OOP Concepts in Java?](#10-what-are-the-oop-concepts-in-java)
 11. [What is the difference between abstract classes and interfaces?](#11-what-is-the-difference-between-abstract-classes-and-interfaces)
+12. [What is method overloading and method overriding?](#12-what-is-method-overloading-and-method-overriding)
 
 ## 0. Up
 ## 1. Explain JVM, JRE and JDK? 
@@ -432,6 +433,61 @@ In __method overloading__, a single method may perform different functions depen
 |If we add a new method to an abstract class then we have the option of providing default implementation and therefore all the existing code might work properly |	If we add a new method to an Interface then we have to track down all the implementations of the interface and define implementation for the new method (this is before Java 8) |
 |An abstract class can contain constructors	| An Interface cannot contain constructors |
 | Abstract classes are fast	| Interfaces are slow as it requires extra indirection to find corresponding method in the actual class |
+
+## 12. What is method overloading and method overriding?
+
+__Method Overloading :___
+* In Method Overloading, Methods of the same class shares the same name but each method must have different number of parameters or parameters having different types and order.
+* Method Overloading is to “add” or “extend” more to method’s behavior.
+* It is a compile time polymorphism.
+* The methods must have different signature.
+* It may or may not need inheritance in Method Overloading.
+
+Let’s take a look at the example below to understand it better.
+
+```java
+class Adder {
+Static int add(int a, int b)
+{
+return a+b;
+}
+Static double add( double a, double b)
+{
+return a+b;
+}
+public static void main(String args[])
+{
+System.out.println(Adder.add(11,11));
+System.out.println(Adder.add(12.3,12.6));
+}}
+```
+
+__Method Overriding :__
+* In Method Overriding, sub class have the same method with same name and exactly the same number and type of parameters and same return type as a super class.
+* Method Overriding is to “Change” existing behavior of method.
+* It is a run time polymorphism.
+* The methods must have same signature.
+* It always requires inheritance in Method Overriding.
+
+Let’s take a look at the example below to understand it better.
+
+```java
+class Car {
+void run(){
+System.out.println(“car is running”); 
+}
+Class Audi extends Car{
+void run()
+{
+System.out.prinltn(“Audi is running safely with 100km”);
+}
+public static void main( String args[])
+{
+Car b=new Audi();
+b.run();
+}
+}
+```
 
 ### __Easy ones but worth mentioning:__ 
 
