@@ -429,7 +429,7 @@ In __method overloading__, a single method may perform different functions depen
 | An abstract class can have non-abstract methods.	| All methods of an Interface are abstract. |
 | An abstract class can have instance variables. | An Interface cannot have instance variables |
 | An abstract class can have any visibility: public, private, protected. |	An Interface visibility must be public (or) none.|
-|If we add a new method to an abstract class then we have the option of providing default implementation and therefore all the existing code might work properly |	If we add a new method to an Interface then we have to track down all the implementations of the interface and define implementation for the new method |
+|If we add a new method to an abstract class then we have the option of providing default implementation and therefore all the existing code might work properly |	If we add a new method to an Interface then we have to track down all the implementations of the interface and define implementation for the new method (this is before Java 8) |
 |An abstract class can contain constructors	| An Interface cannot contain constructors |
 | Abstract classes are fast	| Interfaces are slow as it requires extra indirection to find corresponding method in the actual class |
 
