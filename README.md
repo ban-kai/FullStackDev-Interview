@@ -374,6 +374,21 @@ Polymorphism is one of the core concepts in OOP languages. It describes the conc
 Java supports two kinds of polymorphism. You can overload a method with different sets of parameters. This is called static polymorphism because the compiler statically binds the method call to a specific method.
 
 Within an inheritance hierarchy, a subclass can override a method of its superclass. If you instantiate the subclass, the JVM will always call the overridden method, even if you cast the subclass to its superclass. That is called dynamic polymorphism.
+```
+class Person {
+    void walk() {
+        System.out.println("Can Run….");
+    }
+}
+class Employee extends Person {
+    void walk() {
+        System.out.println("Running Fast…");
+    }
+}
+
+Person p = new Employee(); //upcasting
+p.walk(); // Running Fast…
+```
 
 ## 10. What are the OOP Concepts in Java?
 
@@ -410,3 +425,5 @@ In __method overloading__, a single method may perform different functions depen
 * Explain public static void main(String args[])
 * Why Java is platform independent?
 * What are constructors in Java?
+
+[up](#up)
