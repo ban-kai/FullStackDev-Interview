@@ -9,7 +9,7 @@
 7. [What is the difference between equals() and == ?](#7--what-is-the-difference-between-equals-and--)
 8. [What are the differences between Heap and Stack Memory?](#8-what-are-the-differences-between-heap-and-stack-memory)
 9. [What is Polymorphism?](#9-what-is-polymorphism)
-10. [What are the OOP Concepts in Java?]()
+10. [What are the OOP Concepts in Java?](#10-what-are-the-oop-concepts-in-java)
 
 
 ## 1. Explain JVM, JRE and JDK? 
