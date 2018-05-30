@@ -12,8 +12,8 @@
 10. [What are the OOP Concepts in Java?](#10-what-are-the-oop-concepts-in-java)
 11. [What is the difference between abstract classes and interfaces?](#11-what-is-the-difference-between-abstract-classes-and-interfaces)
 12. [What is method overloading and method overriding?](#12-what-is-method-overloading-and-method-overriding)
-13. [Can you override a private or static method in Java?]()
-14. [What is multiple inheritance? Is it supported by Java?]()
+13. [Can you override a private or static method in Java?](#13-can-you-override-a-private-or-static-method-in-java)
+14. [What is multiple inheritance? Is it supported by Java?](#14-what-is-multiple-inheritance-is-it-supported-by-java)
 
 ## 0. Up
 ## 1. Explain JVM, JRE and JDK? 
