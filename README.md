@@ -1,7 +1,7 @@
 # Java Interview Questions Compilation
 
 ## 1. Explain JVM, JRE and JDK?
-{:toc}
+{:toc:}
 
 __JVM (Java Virtual Machine)__: It is an abstract machine. It is a specification that provides run-time environment in which java bytecode can be executed. It follows three notations:
 
