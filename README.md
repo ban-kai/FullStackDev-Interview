@@ -1,6 +1,7 @@
 # Java Interview Questions Compilation
 
-[Explain JVM, JRE and JDK? ](#markdown-header-my-first-title)
+[Explain JVM, JRE and JDK? ](#Explain JVM, JRE and JDK)
+[Is Java a Compiled or an Interpreted programming language ?](# Is Java a Compiled or an Interpreted programming language)
 
 
 ## 1. Explain JVM, JRE and JDK? 
@@ -18,7 +19,7 @@ __JDK(Java Development Kit)__ : It is the tool necessary to compile, document an
 Refer to this below image and understand how exactly these components reside: ![java](https://cdn-images-1.medium.com/max/1600/0*MsGzRuN1Q09dOkwi.png)
 
 ## 2. Is Java a Compiled or an Interpreted programming language ?
-{:toc}
+
 
 Java implementations typically use a two-step compilation process. Java source code is compiled down to bytecode by the Java compiler. The bytecode is executed by a Java Virtual Machine (JVM). Modern JVMs use a technique called Just-in-Time (JIT) compilation to compile the bytecode to native instructions understood by hardware CPU on the fly at runtime.
 
