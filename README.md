@@ -1,7 +1,14 @@
 # Java Interview Questions Compilation
 
 1. [Explain JVM, JRE and JDK? ](#1-explain-jvm-jre-and-jdk)
-2. [Is Java a Compiled or an Interpreted programming language ?](# Is Java a Compiled or an Interpreted programming language)
+2. [Is Java a Compiled or an Interpreted programming language ?](#2-is-java-a-compiled-or-an-interpreted-programming-language-)
+3. [Why java is not 100% Object-oriented?](#3-why-java-is-not-100-object-oriented)
+4. [What are wrapper classes?](#4-what-are-wrapper-classes)
+5. [What is singleton class and how can we make a class singleton?](#5-what-is-singleton-class-and-how-can-we-make-a-class-singleton)
+6. [What is the difference between Array list and vector?](#6-what-is-the-difference-between-array-list-and-vector)
+7. [What is the difference between equals() and == ?](#7--what-is-the-difference-between-equals-and--)
+8. [What are the differences between Heap and Stack Memory?](#8-what-are-the-differences-between-heap-and-stack-memory)
+9. [What is Polymorphism?](#9-what-is-polymorphism)
 
 
 ## 1. Explain JVM, JRE and JDK? 
