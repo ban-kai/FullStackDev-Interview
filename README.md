@@ -11,7 +11,7 @@
 9. [What is Polymorphism?](#9-what-is-polymorphism)
 10. [What are the OOP Concepts in Java?](#10-what-are-the-oop-concepts-in-java)
 
-
+## 0. Up
 ## 1. Explain JVM, JRE and JDK? 
 
 __JVM (Java Virtual Machine)__: It is an abstract machine. It is a specification that provides run-time environment in which java bytecode can be executed. It follows three notations:
@@ -426,4 +426,4 @@ In __method overloading__, a single method may perform different functions depen
 * Why Java is platform independent?
 * What are constructors in Java?
 
-[up](#up)
+[up](#0-up)
