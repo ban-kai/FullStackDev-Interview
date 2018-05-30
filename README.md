@@ -14,6 +14,8 @@
 12. [What is method overloading and method overriding?](#12-what-is-method-overloading-and-method-overriding)
 13. [Can you override a private or static method in Java?](#13-can-you-override-a-private-or-static-method-in-java)
 14. [What is multiple inheritance? Is it supported by Java?](#14-what-is-multiple-inheritance-is-it-supported-by-java)
+15. [What is association?](#15-what-is-association)
+
 
 ## 0. Up
 ## 1. Explain JVM, JRE and JDK? 
@@ -504,6 +506,8 @@ Therefore, Java doesn’t support multiple inheritance. The problem is commonly 
 
 ![java](https://d1jnx9ba8s6j9r.cloudfront.net/blog/wp-content/uploads/2017/04/MultipleInheritance-Java-240x300.png)
 
+## 15. What is association?
+Association is a relationship where all object have their own lifecycle and there is no owner. Let’s take an example of Teacher and Student. Multiple students can associate with a single teacher and a single student can associate with multiple teachers but there is no ownership between the objects and both have their own lifecycle. These relationship can be one to one, One to many, many to one and many to many.
 
 ### __Easy ones but worth mentioning:__ 
 
