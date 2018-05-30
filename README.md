@@ -306,7 +306,7 @@ That can only be answered at runtime because it depends on the object on which t
 * Your object is of the type of the subclass and gets referenced as the superclass. In the CoffeeMachine example, a PremiumCoffeeMachine object gets referenced as a BasicCoffeeMachine.
 
 
-___Superclass Referenced as the Superclass__
+__Superclass Referenced as the Superclass__
 
 The first scenario is pretty simple. When you instantiate a BasicCoffeeMachine object and store it in a variable of type BasicCoffeeMachine, the JVM will call the brewCoffee method on the BasicCoffeeMachine class. So, you can only brew a CoffeeSelection.FILTER_COFFEE.
 
