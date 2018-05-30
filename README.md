@@ -12,6 +12,8 @@
 10. [What are the OOP Concepts in Java?](#10-what-are-the-oop-concepts-in-java)
 11. [What is the difference between abstract classes and interfaces?](#11-what-is-the-difference-between-abstract-classes-and-interfaces)
 12. [What is method overloading and method overriding?](#12-what-is-method-overloading-and-method-overriding)
+13. [Can you override a private or static method in Java?]()
+14. [What is multiple inheritance? Is it supported by Java?]()
 
 ## 0. Up
 ## 1. Explain JVM, JRE and JDK? 
@@ -488,6 +490,20 @@ b.run();
 }
 }
 ```
+## 13. Can you override a private or static method in Java?
+
+You cannot override a private or static method in Java. If you create a similar method with same return type and same method arguments in child class then it will hide the super class method; this is known as method hiding. Similarly, you cannot override a private method in sub class because it’s not accessible there. What you can do is create another private method with the same name in the child class. Let’s take a look at the example below to understand it better.
+
+## 14. What is multiple inheritance? Is it supported by Java?
+
+If a child class inherits the property from multiple classes is known as multiple inheritance. Java does not allow to extend multiple classes.
+
+The problem with multiple inheritance is that if multiple parent classes have a same method name, then at runtime it becomes difficult for the compiler to decide which method to execute from the child class.
+
+Therefore, Java doesn’t support multiple inheritance. The problem is commonly referred as Diamond Problem.
+
+![java](https://d1jnx9ba8s6j9r.cloudfront.net/blog/wp-content/uploads/2017/04/MultipleInheritance-Java-240x300.png)
+
 
 ### __Easy ones but worth mentioning:__ 
 
