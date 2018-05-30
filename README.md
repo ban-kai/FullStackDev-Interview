@@ -1,7 +1,7 @@
 # Java Interview Questions Compilation
 
-[Explain JVM, JRE and JDK? ](#Explain JVM, JRE and JDK)
-[Is Java a Compiled or an Interpreted programming language ?](# Is Java a Compiled or an Interpreted programming language)
+1. [Explain JVM, JRE and JDK? ](#Explain JVM, JRE and JDK)
+2. [Is Java a Compiled or an Interpreted programming language ?](# Is Java a Compiled or an Interpreted programming language)
 
 
 ## 1. Explain JVM, JRE and JDK? 
