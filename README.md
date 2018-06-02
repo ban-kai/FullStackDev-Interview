@@ -649,6 +649,76 @@ And v is a Vehicle interface reference (Vehicle v)
 
 The compiler automatically handles the conversion (assignment) since the types are compatible (class – interface relationship), i.e., the type Car can be cast to Vehicle interface type since Car implements Vehicle Interface. (Car is a Vehicle).
 
+CASTING OBJECT REFERENCES: EXPLICIT CASTING 
+
+Sometimes we do an explicit cast in java when implicit casts don’t work or are not helpful for a particular scenario. The explicit cast is nothing but the name of the new “type” inside a pair of matched parentheses. As before, we consider the same Car and Ford Class.
+
+```java 
+class Car {
+  void carMethod(){}
+}
+class Ford extends Car {
+ void fordMethod () {}
+}
+```
+
+We also have a breakingSystem() function which takes Car reference (Superclass reference) as an input parameter.
+The method will invoke carMethod() regardless of the type of object (Car or Ford Reference) and if it is a Ford object, it will also invoke fordMethod(). We use the instanceof operator to determine the type of object at run time.
+
+```java
+public void breakingSystem (Car obj) {
+    obj.carMethod();
+   if (obj instanceof Ford)((Ford)obj).fordMethod ();
+}
+```
+
+To invoke the fordMethod(), the operation (Ford)obj tells the compiler to treat the Car object referenced by obj as if it is a Ford object. Without the cast, the compiler will give an error message indicating that fordMethod() cannot be found in the Car definition.
+
+The following program shown illustrates the use of the cast operator with references.
+
+Honda and Ford are Siblings in the class Hierarchy. Both these classes are subclasses of Class Car. Both Car and HeavyVehicle Class extend Object Class. Any class that does not explicitly extend some other class will automatically extends the Object by default. This code instantiates an object of the class Ford and assigns the object’s reference to a reference variable of type Car. This assignment is allowed as Car is a superclass of Ford. In order to use a reference of a class type to invoke a method, the method must be defined at or above that class in the class hierarchy. Hence an object of Class Car cannot invoke a method present in Class Ford, since the method fordMethod is not present in Class Car or any of its superclasses. Hence this problem can be colved by a simple downcast by casting the Car object reference to the Ford Class Object reference as done in the program. Also an attempt to cast an object reference to its Sibling Object reference produces a ClassCastException at runtime, although compilation happens without any error.
+
+```java
+class Car extends Object {
+
+	void carMethod() {
+	}
+}
+
+class HeavyVehicle extends Object {
+}
+
+class Ford extends Car {
+
+	void fordMethod() {
+		System.out.println("I am fordMethod defined in Class Ford");
+	}
+}
+
+class Honda extends Car {
+
+	void fordMethod() {
+		System.out.println("I am fordMethod defined in Class Ford");
+	}
+}
+
+public class ObjectCastingEx {
+
+	public static void main(String[] args) {
+		Car obj = new Ford();
+		//    Following will result in compilation error
+		//    obj.fordMethod();	//As the method fordMethod is undefined for the Car Type
+		//  Following will result in compilation error
+		// ((HeavyVehicle)obj).fordMethod();
+					//fordMethod is undefined in the HeavyVehicle Type
+		//  Following will result in compilation error
+		((Ford) obj).fordMethod();
+		//Following will compile and run
+		//	Honda hondaObj = (Ford)obj;	Cannot convert as they are sibblings
+	}
+}
+```
+
 ## 26 Why should I have super type reference & sub class object?
 
 Just now I've got an email from one of my student with the following question: "Why should we create `Animal obj = new Dog();` instead of `Dog obj = new Dog();`" Of course the example given here is made by myself but the question in detail is why all use super interface or super class reference instead of using the same class reference. You got the question right? This article answers the question.
