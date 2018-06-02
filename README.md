@@ -567,6 +567,88 @@ A literal is a value that may be assigned to a primitive or string variable or p
 
 To create a conversion between two incompatible types, we must use a cast. There are two types of casting in java: automatic casting (done automatically) and explicit casting (done by programmer).
 
+Java object typecasting one object reference can be type cast into another object reference. The cast can be to its own class type or to one of its subclass or superclass types or interfaces. There are compile-time rules and runtime rules for casting in java.
+
+Typecast Objects with a dynamically loaded Class ? – The casting of object references depends on the relationship of the classes involved in the same hierarchy. Any object reference can be assigned to a reference variable of the type Object, because the Object class is a superclass of every Java class.
+There can be 2 casting java scenarios
+
+* Upcasting
+* Downcasting
+
+When we cast a reference along the class hierarchy in a direction from the root class towards the children or subclasses, it is a downcast. When we cast a reference along the class hierarchy in a direction from the sub classes towards the root, it is an upcast. We need not use a cast operator in this case.
+
+The compile-time rules are there to catch attempted casts in cases that are simply not possible. This happens when we try to attempt casts on objects that are totally unrelated (that is not subclass super class relationship or a class-interface relationship) At runtime a ClassCastException is thrown if the object being cast is not compatible with the new type it is being cast to.
+
+Below is an example showing when a ClassCastException can occur during object casting
+
+```java
+//X is a supper class of Y and Z which are sibblings.
+
+public class X {}
+public class Y extends X {}
+public class Z extends X {}
+public class RunTimeCastDemo {
+
+	public static void main(String args[]) {
+		X x = new X();
+		Y y = new Y();
+		Z z = new Z();
+		X xy = new Y(); // compiles ok (up the hierarchy)
+		X xz = new Z(); // compiles ok (up the hierarchy)
+		//		Y yz = new Z();   incompatible type (siblings)
+		//		Y y1 = new X();   X is not a Y
+		//		Z z1 = new X();   X is not a Z
+		X x1 = y; // compiles ok (y is subclass of X)
+		X x2 = z; // compiles ok (z is subclass of X)
+		Y y1 = (Y) x; // compiles ok but produces runtime error
+		Z z1 = (Z) x; // compiles ok but produces runtime error
+		Y y2 = (Y) x1; // compiles and runs ok (x1 is type Y)
+		Z z2 = (Z) x2; // compiles and runs ok (x2 is type Z)
+		//		Y y3 = (Y) z;     inconvertible types (siblings)
+		//		Z z3 = (Z) y;     inconvertible types (siblings)
+		Object o = z;
+		Object o1 = (Y) o; // compiles ok but produces runtime error
+	}
+}
+```
+
+__CASTING OBJECT REFERENCES: IMPLICIT CASTING USING A COMPILER__
+
+In general an implicit cast is done when an Object reference is assigned (cast) to:
+
+* A reference variable whose type is the same as the class from which the object was instantiated.
+An Object as Object is a super class of every Class.
+* A reference variable whose type is a super class of the class from which the object was instantiated.
+* A reference variable whose type is an interface that is implemented by the class from which the object was instantiated.
+* A reference variable whose type is an interface that is implemented by a super class of the class from which the object was instantiated.
+
+Consider an interface Vehicle, a super class Car and its subclass Ford. The following example shows the automatic conversion of object references handled by the compiler
+
+```java
+interface Vehicle {}
+class Car implements Vehicle {}
+class Ford extends Car {}
+```
+
+Let c be a variable of type Car class and f be of class Ford and v be an vehicle interface reference. We can assign the Ford reference to the Car variable:
+I.e. we can do the following
+
+Example 1
+`c = f; //Ok Compiles fine`
+
+Where c = new Car();
+And, f = new Ford();
+The compiler automatically handles the conversion (assignment) since the types are compatible (sub class – super class relationship), i.e., the type Car can hold the type Ford since a Ford is a Car.
+
+Example 2
+`v = c; //Ok Compiles fine`
+`c = v; // illegal conversion from interface type to class type results in compilation error`
+
+Where c = new Car();
+And v is a Vehicle interface reference (Vehicle v)
+
+The compiler automatically handles the conversion (assignment) since the types are compatible (class – interface relationship), i.e., the type Car can be cast to Vehicle interface type since Car implements Vehicle Interface. (Car is a Vehicle).
+
 ## 26 Why should I have super type reference & sub class object?
 
 Just now I've got an email from one of my student with the following question: "Why should we create `Animal obj = new Dog();` instead of `Dog obj = new Dog();`" Of course the example given here is made by myself but the question in detail is why all use super interface or super class reference instead of using the same class reference. You got the question right? This article answers the question.
