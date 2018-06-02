@@ -93,6 +93,7 @@ class Singleton
     }
 }
 ```
+The best example of singleton usage scenario is when there is a limit of having only one connection to a database due to some driver limitations or because of any licensing issues.
 
 ## 6. What is the difference between Array list and vector?
 
@@ -543,7 +544,269 @@ Encapsulation is a concept in Object Oriented Programming for combining properti
 
 Encapsulation helps programmers to follow a modular approach for software development as each object has its own set of methods and variables and serves its functions independent of other objects. Encapsulation also serves data hiding purpose.
 
+## 22. Different Data types in Java and their size
 
+byte — 8 bit (are esp. useful when working with a stream of data from a network or a file).
+short — 16 bit
+char — 16 bit Unicode
+int — 32 bit (whole number)
+float — 32 bit (real number)
+long — 64 bit (Single precision)
+double — 64 bit (double precision)
+boolean - virtual machine dependent.
+
+## 23. What is Unicode?
+
+Java uses Unicode to represent the characters. Unicode defines a fully international character set that can represent all of the characters found in human languages.
+
+## 24. What are Literals?
+
+A literal is a value that may be assigned to a primitive or string variable or passed as an argument to a method.
+
+## 25. What is Type casting in Java?
+
+To create a conversion between two incompatible types, we must use a cast. There are two types of casting in java: automatic casting (done automatically) and explicit casting (done by programmer).
+
+## 26 Why should I have super type reference & sub class object?
+
+Just now I've got an email from one of my student with the following question: "Why should we create `Animal obj = new Dog();` instead of `Dog obj = new Dog();`" Of course the example given here is made by myself but the question in detail is why all use super interface or super class reference instead of using the same class reference. You got the question right? This article answers the question.
+
+The answer is: "It is a best practice being followed by our ancestors. Stop asking questions and code that way :-)" 
+
+Ok, more seriously, consider the following example:
+
+There is a SuperFancyClass created by developer A for some super fancy purposes. Note that all the references are HashMap.
+
+```java
+import java.util.HashMap;
+
+public class SuperFancyClass {
+    
+    private HashMap<String, Object> mapOne;
+    private HashMap<Integer, Object> mapTwo;
+
+    public SuperFancyClass() {
+        this.mapOne = new HashMap<>();
+        this.mapTwo = new HashMap<>();
+    }
+
+    public HashMap<String, Object> doStuff1() {
+        // Do something
+        return this.mapOne;
+    }
+
+    public HashMap<String, Object> doStuff2() {
+        // Do something
+        return this.mapOne;
+    }
+
+    public HashMap<Integer, Object> doStuff3() {
+        // Do something
+        return this.mapTwo;
+    }
+
+    // Some other highly complex code here
+}
+```
+
+That class is being used by developer B as given below.
+
+```java
+import java.util.HashMap;
+
+public class SensitiveAgent {
+
+    public static void main(String[] args) {
+        
+        SuperFancyClass superFancy = new SuperFancyClass();
+        HashMap<String, Object> map1 = superFancy.doStuff1();
+        HashMap<String, Object> map2 = superFancy.doStuff2();
+        HashMap<Integer, Object> map3 = superFancy.doStuff3();
+    }
+    // Some other highly complex code here
+}
+```
+
+Assuming both classes are highly complex but both developers A and B are happy with what they have, there is nothing else to worry.
+
+As time progress, now developer A wants to make his Maps to maintain the insertion order. The Java API says, `HashMap` does not respect the insertion order so if you need insertion order, you need to switch to `LinkedHashMap`.
+
+So now developer A wants to find and replace all of his/her HashMaps by LinkedHashMap. But this will not be such a short happy ending story in a highly complex code base where there can be several other local HashMaps which cannot be replaced by LinkedHashMap. So in reality, developer A has to go and change everywhere it requires to LinkedHashMap as provided below.
+
+```java
+import java.util.LinkedHashMap;
+
+public class SuperFancyClass {
+    
+    private LinkedHashMap<String, Object> mapOne;
+    private LinkedHashMap<Integer, Object> mapTwo;
+
+    public SuperFancyClass() {
+        this.mapOne = new LinkedHashMap<>();
+        this.mapTwo = new LinkedHashMap<>();
+    }
+
+    public LinkedHashMap<String, Object> doStuff1() {
+        // Do something
+        return this.mapOne;
+    }
+
+    public LinkedHashMap<String, Object> doStuff2() {
+        // Do something
+        return this.mapOne;
+    }
+
+    public LinkedHashMap<Integer, Object> doStuff3() {
+        // Do something
+        return this.mapTwo;
+    }
+
+    // Some other highly complex code here
+}
+```
+
+But now the code of developer B collapses because of the changes done in SuperFancyClass. Then developer B has to go and change the references from HashMap to LinkedHashMap as shown below.
+
+```java
+import java.util.LinkedHashMap;
+
+public class SensitiveAgent {
+
+    public static void main(String[] args) {
+        
+        SuperFancyClass superFancy = new SuperFancyClass();
+        LinkedHashMap<String, Object> map1 = superFancy.doStuff1();
+        LinkedHashMap<String, Object> map2 = superFancy.doStuff2();
+        LinkedHashMap<Integer, Object> map3 = superFancy.doStuff3();
+    }
+
+    // Some other highly complex code here
+}
+```
+
+Rule of debugging:
+Now, this is the time to introduce an important rule of debugging: 
+
+__Fixing a bug is equivalent to making several other bugs.__
+
+In other words, if you modify an existing code, the number of changes you have made will be proportional to the number of newly expected bugs because we are all human and we do mistakes. Without our intention, we might delete a local variable that hides an instance variable. Or else we might modify that single line which causes to bring the entire world to end. So always keep your changes as less as possible.
+Coming back to the previous scenario, developer A modifies the SuperFancyClass in 7 places and developer B has to modify the SensitiveAgent in 3 places. Even in a code-base which contains two dummy classes, there are 10 places altogether to modify. Just imagine a project with hundreds/thousands of classes and millions of lines. Yep they do exists and it will be a catastrophic.
+
+Time to travel back...
+Suppose if the developer A designed his/her class as given below using super interface references (However the objects must be created using subclass. See the constructor):
+
+```java
+import java.util.Map;
+import java.util.HashMap;
+
+public class SuperFancyClass {
+    
+    private Map<String, Object> mapOne;
+    private Map<Integer, Object> mapTwo;
+
+    public SuperFancyClass() {
+        this.mapOne = new HashMap<>();
+        this.mapTwo = new HashMap<>();
+    }
+
+    public Map<String, Object> doStuff1() {
+        // Do something
+        return this.mapOne;
+    }
+
+    public Map<String, Object> doStuff2() {
+        // Do something
+        return this.mapOne;
+    }
+
+    public Map<Integer, Object> doStuff3() {
+        // Do something
+        return this.mapTwo;
+    }
+
+    // Some other highly complex code here
+}
+```
+
+The developer B would developed his/her code like this because the return types of those methods are Map; the super interface:
+
+```java
+import java.util.Map;
+
+public class SensitiveAgent {
+
+    public static void main(String[] args) {
+        
+        SuperFancyClass superFancy = new SuperFancyClass();
+        Map<String, Object> map1 = superFancy.doStuff1();
+        Map<String, Object> map2 = superFancy.doStuff2();
+        Map<Integer, Object> map3 = superFancy.doStuff3();
+    }
+
+    // Some other highly complex code here
+}
+```
+
+Now if the same situation comes where the developer A wants to preserve insertion order in his/her maps, only lines he/she has to change are just those two lines inside the constructor as shown below:
+
+```java
+import java.util.Map;
+import java.util.LinkedHashMap;
+
+public class SuperFancyClass {
+    
+    private Map<String, Object> mapOne;
+    private Map<Integer, Object> mapTwo;
+
+    public SuperFancyClass() {
+        this.mapOne = new LinkedHashMap<>();
+        this.mapTwo = new LinkedHashMap<>();
+    }
+
+    public Map<String, Object> doStuff1() {
+        // Do something
+        return this.mapOne;
+    }
+
+    public Map<String, Object> doStuff2() {
+        // Do something
+        return this.mapOne;
+    }
+
+    public Map<Integer, Object> doStuff3() {
+        // Do something
+        return this.mapTwo;
+    }
+
+    // Some other highly complex code here
+}
+```
+
+Developer B does not need to change anything because there is nothing changed int the API level (return types are not changed by developer A). So now the same behavior is achieved with less number of modifications (This time only 2). This is what we call extensible, modifiable, (all those blah-blah-blah-able) code.
+
+Then why not Object instead of Map?
+
+Now you may have a question: Should we always use the super most interface/class as the reference? Not always. It depends on the requirements. Climbing towards super types means, we are limiting the features because 99% of the time, sub classes have more features than super types. For example, compare java.lang.Number with its sub classes or compare java.util.Collection with its sub interfaces/classes. So use the super type reference which has all the functionalities you are expected to have.
+
+Does the rule applied to local variables?
+Then what is the advantage of using super reference in local variables which have no impact on others? I guess this is because we developers are used to that and there is nothing wrong in following the same practice in local variables. For example, consider this case:
+
+```java
+import java.util.List;
+import java.util.ArrayList;
+
+public class HelloWorld {
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("Java");
+        list.add("Python");
+        list.add("C++");
+        System.out.println(list);
+    }
+}
+```
+
+In this code there is no advantage of using super interface reference but I do write this way because I am used to it. If there is no disadvantages, why do you bother about it? Keep calm and code your references in super type :-)
 
 ### __Easy ones but worth mentioning:__ 
 
