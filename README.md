@@ -15,6 +15,8 @@
 13. [Can you override a private or static method in Java?](#13-can-you-override-a-private-or-static-method-in-java)
 14. [What is multiple inheritance? Is it supported by Java?](#14-what-is-multiple-inheritance-is-it-supported-by-java)
 15. [What is association?](#15-what-is-association)
+16. [Is Java platform independent?](#16-is-java-platform-independent)
+17. [What are the various access specifiers for Java classes?]()
 
 
 ## 0. Up
@@ -440,7 +442,7 @@ In __method overloading__, a single method may perform different functions depen
 
 ## 12. What is method overloading and method overriding?
 
-__Method Overloading :___
+__Method Overloading :__
 * In Method Overloading, Methods of the same class shares the same name but each method must have different number of parameters or parameters having different types and order.
 * Method Overloading is to “add” or “extend” more to method’s behavior.
 * It is a compile time polymorphism.
@@ -507,7 +509,41 @@ Therefore, Java doesn’t support multiple inheritance. The problem is commonly 
 ![java](https://d1jnx9ba8s6j9r.cloudfront.net/blog/wp-content/uploads/2017/04/MultipleInheritance-Java-240x300.png)
 
 ## 15. What is association?
+
 Association is a relationship where all object have their own lifecycle and there is no owner. Let’s take an example of Teacher and Student. Multiple students can associate with a single teacher and a single student can associate with multiple teachers but there is no ownership between the objects and both have their own lifecycle. These relationship can be one to one, One to many, many to one and many to many.
+
+## 16. Is Java platform independent?
+
+Yes. Java is a platform independent language. We can write java code on one platform and run it on another platform. For e.g. we can write and compile the code on windows and can run it on Linux or any other supported platform. This is one of the main features of java.
+
+## 17. What are the various access specifiers for Java classes?
+
+The types of access specifiers for classes are:
+
+* Public: Class,Method,Field is accessible from anywhere.
+* Protected: Method,Field can be accessed from the same class to which they belong or from the sub-classes,and from the class of same package,but not from outside.
+* Default: Method,Field,class can be accessed only from the same package and not from outside of it’s native package.
+* Private: Method,Field can be accessed from the same class to which they belong.
+
+## 18. What all memory areas are allocated by JVM?
+
+Heap, Stack, Program Counter Register and Native Method Stack.
+
+## 19. What’s the purpose of Static methods and static variables?
+
+When there is a requirement to share a method or a variable between multiple objects of a class instead of creating separate copies for each object, we use static keyword to make a method or variable shared for all objects. A static method or variable is shared across all object instances of that class.
+
+## 20. What is class?
+
+Class is nothing but a template that describes the data and behavior associated with instances of that class. Another definition is that a class represents a blueprint.
+
+## 21. What is data encapsulation and what’s its significance?
+
+Encapsulation is a concept in Object Oriented Programming for combining properties and methods in a single unit.
+
+Encapsulation helps programmers to follow a modular approach for software development as each object has its own set of methods and variables and serves its functions independent of other objects. Encapsulation also serves data hiding purpose.
+
+
 
 ### __Easy ones but worth mentioning:__ 
 
