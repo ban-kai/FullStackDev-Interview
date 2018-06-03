@@ -1052,11 +1052,133 @@ _Output: Inside start method of Car_
 
 A sub-class is a class which inherits from another class called super class. Sub-class can access all public and protected methods and fields of its super class.
 
+## 34. What is the difference between abstract class and interface?
 
+The primary difference between an abstract class and interface is that an interface can only possess declaration of public static methods with no concrete implementation while an abstract class can have members with any access specifiers (public, private etc) with or without concrete implementation. Interfaces are slower in performance as compared to abstract classes as extra indirections are required for interfaces.
 
+Another key difference in the use of abstract classes and interfaces is that a class which implements an interface must implement all the methods of the interface while a class which inherits from an abstract class doesn’t require implementation of all the methods of its super class.
 
+A class can implement multiple interfaces but it can extend only one abstract class.
 
+Also:
+* Abstract class can have abstract and non-abstract methods. An interface can only have abstract methods.
+* An abstract class can have static methods but an interface cannot have static methods.
+* Abstract class can have constructors but an interface cannot have constructors.
 
+## 35. Can Java interfaces have fields?
+ 
+Yes. 
+All fields in interface are public static final, i.e. they are constants.
+
+It is generally recommended to avoid such interfaces, but sometimes you can find an interface that has no methods and is used only to contain list of constant values.
+
+## 36. Which access modifiers can be applied to the inner classes?
+public ,private , abstract, final, protected.
+
+## 37. Can main() method in Java can return any data?
+
+In Java, main() method can’t return any data and hence, it’s always declared with a void return type.
+
+## 38. Can we declare a class as Abstract without having any abstract method?
+
+Yes we can create an abstract class by using abstract keyword before class name even if it doesn’t have any abstract method. However, if a class has even one abstract method, it must be declared as abstract otherwise it will give an error.
+
+## 39. Is Java “pass-by-reference” or “pass-by-value”?
+
+Java is always pass-by-value. Unfortunately, they decided to call the location of an object a "reference". When we pass the value of an object, we are passing the reference to it. This is confusing to beginners.
+
+It goes like this:
+
+```java
+public static void main(String[] args) {
+    Dog aDog = new Dog("Max");
+    // we pass the object to foo
+    foo(aDog);
+    // aDog variable is still pointing to the "Max" dog when foo(...) returns
+    aDog.getName().equals("Max"); // true, java passes by value
+    aDog.getName().equals("Fifi"); // false 
+}
+
+public static void foo(Dog d) {
+    d.getName().equals("Max"); // true
+    // change d inside of foo() to point to a new Dog instance "Fifi"
+    d = new Dog("Fifi");
+    d.getName().equals("Fifi"); // true
+}
+```
+
+In the example above aDog.getName() will still return "Max". The value aDog within main is not changed in the function foo with the Dog "Fifi" as the object reference is passed by value. If it were passed by reference, then the aDog.getName() in main would return "Fifi" after the call to foo.
+
+Likewise:
+
+```java
+public static void main(String[] args) {
+    Dog aDog = new Dog("Max");
+    foo(aDog);
+    // when foo(...) returns, the name of the dog has been changed to "Fifi"
+    aDog.getName().equals("Fifi"); // true
+}
+
+public static void foo(Dog d) {
+    d.getName().equals("Max"); // true
+    // this changes the name of d to be "Fifi"
+    d.setName("Fifi");
+}
+```
+
+In the above example, Fifi is the dog's name after call to foo(aDog) because the object's name was set inside of foo(...). Any operations that foo performs on d are such that, for all practical purposes, they are performed on aDog itself (except when d is changed to point to a different Dog instance like d = new Dog("Boxer")).
+
+## 40. What is static block?
+A static block gets executed at the time of class loading. They are used for initializing static variables.
+
+## 41. Use of final keyword in Java
+
+* Final methods — These methods cannot be overridden by any other method.
+* Final variable — Constants, the value of these variable can’t be changed, its fixed.
+* Final class — Such classes cannot be inherited by other classes. These type of classes will be used when application required security or someone don’t want that particular class.
+
+## 42. How an object is serialized in java?
+
+In Java, to convert an object into byte stream by serialization, an interface with the name Serializable is implemented by the class. All objects of a class implementing serializable interface get serialized and their state is saved in byte stream.
+
+When we should use serialization?
+
+Serialization is used when data needs to be transmitted over the network. Using serialization, object’s state is saved and converted into byte stream .The byte stream is transferred over the network and the object is re-created at destination.
+
+## 43. What are the types of exceptions?
+
+There are two types of exceptions: checked and unchecked exceptions.
+* Checked exceptions: These exceptions must be handled by programmer otherwise the program would throw a compilation error.
+* Unchecked exceptions: It is up to the programmer to write the code in such a way to avoid unchecked exceptions. You would not get a compilation error if you do not handle these exceptions. These exceptions occur at runtime.
+
+## 44. In the below example, how many String Objects are created?
+
+```java
+String s1=”I am Java Expert”;
+String s2=”I am C Expert”;
+String s3=”I am Java Expert”;
+```
+
+In the above example, two objects of Java.Lang.String class are created. s1 and s3 are references to same object.
+
+Thanks to the immutability of Strings in Java, the JVM can optimize the amount of memory allocated for them by storing only one copy of each literal String in the pool. This process is called interning.
+
+When we create a String variable and assign a value to it, the JVM searches the pool for a String of equal value.
+If found, the Java compiler will simply return a reference to its memory address, without allocating additional memory.
+If not found, it’ll be added to the pool (interned) and its reference will be returned.
+
+Let’s write a small test to verify this:
+
+```java
+String constantString1 = "Baeldung";
+String constantString2 = "Baeldung";
+         
+assertThat(constantString1).isSameAs(constantString2);
+```
+
+## 45. What is multi-threading?
+
+Multithreading is a programming concept to run multiple tasks in a concurrent manner within a single program. Threads share same process stack and running in parallel. It helps in performance improvement of any program.
 
 ### __Easy ones but worth mentioning:__ 
 
