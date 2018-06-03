@@ -971,6 +971,10 @@ public class HelloWorld {
 
 In this code there is no advantage of using super interface reference but I do write this way because I am used to it. If there is no disadvantages, why do you bother about it? Keep calm and code your references in super type :-)
 
+## 27. What is the difference between double and float variables in Java?
+
+In Java, float takes 4 bytes in memory while Double takes 8 bytes in memory. Float is single precision floating point decimal number while Double is double precision decimal number.
+
 ### __Easy ones but worth mentioning:__ 
 
 * Explain public static void main(String args[])
