@@ -975,6 +975,89 @@ In this code there is no advantage of using super interface reference but I do w
 
 In Java, float takes 4 bytes in memory while Double takes 8 bytes in memory. Float is single precision floating point decimal number while Double is double precision decimal number.
 
+## 28. Can we override a static method?
+No, we cannot override a static method
+
+## 29. Does Java support operator overloading?
+Operator overloading is not supported in Java.
+
+## 30. Can we overload a method by just changing the return type and without changing the signature of method?
+No, We cannot do this.
+
+## 31. Is it possible to overload main() method of a class?
+Yes, we can overload main() method as well.
+
+## 32. What is the difference between an Inner Class and a Sub-Class?
+
+An Inner class is a class which is nested within another class. An Inner class has access rights for the class which is nesting it and it can access all variables and methods defined in the outer class.
+
+## 33. What is static and dynamic binding?
+
+Here are a few important differences between static and dynamic binding:
+
+* Static binding in Java occurs during compile time while dynamic binding occurs during runtime.
+* private, final and static methods and variables use static binding and are bonded by compiler while virtual methods are bonded during runtime based upon runtime object.
+* Static binding uses Type (class in Java) information for binding while dynamic binding uses object to resolve binding.
+* Overloaded methods are bonded using static binding while overridden methods are bonded using dynamic binding at runtime.
+
+Here is an example which will help you to understand both static and dynamic binding in Java.
+
+__Static Binding Example in Java__
+
+```java
+public class StaticBindingTest {  
+    public static void main(String args[]) {
+        Collection c = new HashSet();
+        StaticBindingTest et = new StaticBindingTest();
+        et.sort(c);
+    }
+    //overloaded method takes Collection argument
+    public Collection sort(Collection c) {
+        System.out.println("Inside Collection sort method");
+        return c;
+    }
+    //another overloaded method which takes HashSet argument which is sub class
+    public Collection sort(HashSet hs) {
+        System.out.println("Inside HashSet sort method");
+        return hs;
+    }
+}
+```
+_Output: Inside Collection sort method_
+
+__Example of Dynamic Binding in Java__
+
+```java
+public class DynamicBindingTest {   
+    public static void main(String args[]) {
+        Vehicle vehicle = new Car(); //here Type is vehicle but object will be Car
+        vehicle.start(); //Car's start called because start() is overridden method
+    }
+}
+
+class Vehicle {
+    public void start() {
+        System.out.println("Inside start method of Vehicle");
+    }
+}
+
+class Car extends Vehicle {
+    @Override
+    public void start() {
+        System.out.println("Inside start method of Car");
+    }
+}
+```
+_Output: Inside start method of Car_
+
+A sub-class is a class which inherits from another class called super class. Sub-class can access all public and protected methods and fields of its super class.
+
+
+
+
+
+
+
 ### __Easy ones but worth mentioning:__ 
 
 * Explain public static void main(String args[])
