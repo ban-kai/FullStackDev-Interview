@@ -16,7 +16,18 @@
 14. [What is multiple inheritance? Is it supported by Java?](#14-what-is-multiple-inheritance-is-it-supported-by-java)
 15. [What is association?](#15-what-is-association)
 16. [Is Java platform independent?](#16-is-java-platform-independent)
-17. [What are the various access specifiers for Java classes?]()
+17. [What are the various access specifiers for Java classes?](#17-what-are-the-various-access-specifiers-for-java-classes)
+18. [What all memory areas are allocated by JVM?](#18-what-all-memory-areas-are-allocated-by-jvm)
+19. [What’s the purpose of Static methods and static variables?](#19-whats-the-purpose-of-static-methods-and-static-variables)
+20. [What is class?](#20-what-is-a-class)
+21. [What is data encapsulation and what’s its significance?](#21-what-is-data-encapsulation-and-whats-its-significance)
+22. [Primivite data types in Java and their size](#22-primitive-data-types-in-java-and-their-size)
+23. [What is unicode?](#23-what-is-unicode)
+24. [What are Literals?](#24-what-are-literals)
+25. [What is Type casting in Java?](#25-what-is-type-casting-in-java)
+26. [Why should I have super type reference & sub class object?](#26-why-should-i-have-super-type-reference--sub-class-object)
+
+
 
 
 ## 0. Up
@@ -544,16 +555,16 @@ Encapsulation is a concept in Object Oriented Programming for combining properti
 
 Encapsulation helps programmers to follow a modular approach for software development as each object has its own set of methods and variables and serves its functions independent of other objects. Encapsulation also serves data hiding purpose.
 
-## 22. Different Data types in Java and their size
+## 22. Primitive data types in Java and their size
 
-byte — 8 bit (are esp. useful when working with a stream of data from a network or a file).
-short — 16 bit
-char — 16 bit Unicode
-int — 32 bit (whole number)
-float — 32 bit (real number)
-long — 64 bit (Single precision)
-double — 64 bit (double precision)
-boolean - virtual machine dependent.
+* byte — 8 bit (are esp. useful when working with a stream of data from a network or a file).
+* short — 16 bit
+* char — 16 bit Unicode
+* int — 32 bit (whole number)
+* float — 32 bit (real number)
+* long — 64 bit (Single precision)
+* double — 64 bit (double precision)
+* boolean - virtual machine dependent.
 
 ## 23. What is Unicode?
 
@@ -719,7 +730,7 @@ public class ObjectCastingEx {
 }
 ```
 
-## 26 Why should I have super type reference & sub class object?
+## 26. Why should I have super type reference & sub class object?
 
 Just now I've got an email from one of my student with the following question: "Why should we create `Animal obj = new Dog();` instead of `Dog obj = new Dog();`" Of course the example given here is made by myself but the question in detail is why all use super interface or super class reference instead of using the same class reference. You got the question right? This article answers the question.
 
