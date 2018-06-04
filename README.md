@@ -61,7 +61,7 @@
 10. [In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?](#10-in-what-order-will-the-numbers-1-4-be-logged-to-the-console-when-the-code-below-is-executed-why)
 
 ## Algorithms
-1. [Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.]()
+1. [Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.](#1-write-a-simple-function-less-than-160-characters-that-returns-a-boolean-indicating-whether-or-not-a-string-is-a-palindrome)
 
 
 ## 0. Up
