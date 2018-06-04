@@ -1198,10 +1198,4 @@ assertThat(constantString1).isSameAs(constantString2);
 
 Multithreading is a programming concept to run multiple tasks in a concurrent manner within a single program. Threads share same process stack and running in parallel. It helps in performance improvement of any program.
 
-### __Easy ones but worth mentioning:__ 
-
-* Explain public static void main(String args[])
-* Why Java is platform independent?
-* What are constructors in Java?
-
 [up](#0-up)
