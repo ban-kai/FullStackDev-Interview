@@ -51,10 +51,12 @@
 
 ## JavaScript
 
-
 1. [What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
 2. [What will the code below output to the console and why?](#2-what-will-the-code-below-output-to-the-console-and-why)
-
+3. [What will the code below output to the console and why?](#3-what-will-the-code-below-output-to-the-console-and-why)
+4. [What is the significance of, and reason for, wrapping the entire content of a JavaScript source file in a function block?](#4-what-is-the-significance-of-and-reason-for-wrapping-the-entire-content-of-a-javascript-source-file-in-a-function-block)
+5. [What is the significance, and what are the benefits, of including 'use strict' at the beginning of a JavaScript source file?](#5-what-is-the-significance-and-what-are-the-benefits-of-including-use-strict-at-the-beginning-of-a-javascript-source-file)
+6. [Consider the two functions below. Will they both return the same thing? Why or why not?](#6-consider-the-two-functions-below-will-they-both-return-the-same-thing-why-or-why-not)
 
 ## 0. Up
 ## 1. Explain JVM, JRE and JDK? 
