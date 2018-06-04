@@ -49,13 +49,16 @@
 45. [Java: What is multi-threading?](#45-what-is-multi-threading)
 
 ## JavaScript
+1. [JavaScript: What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
+2. [JavaScript: What will the code below output to the console and why?](#2-what-will-the-code-below-output-to-the-console-and-why)
+3. [JavaScript: What will the code below output to the console and why?](#3-what-will-the-code-below-output-to-the-console-and-why)
+4. [JavaScript: What is the significance of, and reason for, wrapping the entire content of a JavaScript source file in a function block?](#4-what-is-the-significance-of-and-reason-for-wrapping-the-entire-content-of-a-javascript-source-file-in-a-function-block)
+5. [JavaScript: What is the significance, and what are the benefits, of including 'use strict' at the beginning of a JavaScript source file?](#5-what-is-the-significance-and-what-are-the-benefits-of-including-use-strict-at-the-beginning-of-a-javascript-source-file)
+6. [JavaScript: Consider the two functions below. Will they both return the same thing? Why or why not?](#6-consider-the-two-functions-below-will-they-both-return-the-same-thing-why-or-why-not)
+7. [JavaScript: What will the code below output? Explain your answer](#7-what-will-the-code-below-output-explain-your-answer)
+8. [JavaScript: What is NaN? What is its type? How can you reliably test if a value is equal to NaN?](#8-what-is-nan-what-is-its-type-how-can-you-reliably-test-if-a-value-is-equal-to-nan)
+9. [JavaScript: Discuss possible ways to write a function isInteger(x) that determines if x is an integer.](#9-discuss-possible-ways-to-write-a-function-isintegerx-that-determines-if-x-is-an-integer)
 
-1. [What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
-2. [What will the code below output to the console and why?](#2-what-will-the-code-below-output-to-the-console-and-why)
-3. [What will the code below output to the console and why?](#3-what-will-the-code-below-output-to-the-console-and-why)
-4. [What is the significance of, and reason for, wrapping the entire content of a JavaScript source file in a function block?](#4-what-is-the-significance-of-and-reason-for-wrapping-the-entire-content-of-a-javascript-source-file-in-a-function-block)
-5. [What is the significance, and what are the benefits, of including 'use strict' at the beginning of a JavaScript source file?](#5-what-is-the-significance-and-what-are-the-benefits-of-including-use-strict-at-the-beginning-of-a-javascript-source-file)
-6. [Consider the two functions below. Will they both return the same thing? Why or why not?](#6-consider-the-two-functions-below-will-they-both-return-the-same-thing-why-or-why-not)
 
 ## 0. Up
 
