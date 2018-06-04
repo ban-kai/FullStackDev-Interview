@@ -63,9 +63,6 @@
 ## Algorithms
 1. [Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.](#1-write-a-simple-function-less-than-160-characters-that-returns-a-boolean-indicating-whether-or-not-a-string-is-a-palindrome)
 
-
-## 0. Up
-
 # Java Part
 
 ## 1. Explain JVM, JRE and JDK? 
@@ -1502,5 +1499,3 @@ console.log(isPalindrome("level"));                   // logs 'true'
 console.log(isPalindrome("levels"));                  // logs 'false'
 console.log(isPalindrome("A car, a man, a maraca"));  // logs 'true'
 ```
-
-[up](#0-up)
