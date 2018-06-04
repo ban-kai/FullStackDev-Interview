@@ -1481,7 +1481,7 @@ Similarly, `setTimeout()` also puts execution of its referenced function into th
 
 When a value of zero is passed as the second argument to `setTimeout()`, it attempts to execute the specified function “as soon as possible”. Specifically, execution of the function is placed on the event queue to occur on the next timer tick. Note, though, that this is not immediate; the function is not executed until the next tick. That’s why in the above example, the call to console.log(4) occurs before the call to console.log(3) (since the call to console.log(3) is invoked via setTimeout, so it is slightly delayed).
 
-# Algorithms
+# Algorithms Part
 
 ## 1. Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.
 
