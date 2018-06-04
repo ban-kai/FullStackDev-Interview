@@ -58,6 +58,9 @@
 6. [Consider the two functions below. Will they both return the same thing? Why or why not?](#6-consider-the-two-functions-below-will-they-both-return-the-same-thing-why-or-why-not)
 
 ## 0. Up
+
+# Java Part
+
 ## 1. Explain JVM, JRE and JDK? 
 
 __JVM (Java Virtual Machine)__: It is an abstract machine. It is a specification that provides run-time environment in which java bytecode can be executed. It follows three notations:
@@ -1207,13 +1210,13 @@ assertThat(constantString1).isSameAs(constantString2);
 
 Multithreading is a programming concept to run multiple tasks in a concurrent manner within a single program. Threads share same process stack and running in parallel. It helps in performance improvement of any program.
 
-
+# JavaScript Part
 
 ## 1. What is a potential pitfall with using `typeof bar === "object"` to determine if bar is an object? How can this pitfall be avoided?
 
 Although `typeof bar === "object"` is a reliable way of checking if bar is an object, the surprising gotcha in JavaScript is that null is also considered an object!
 
-```
+```javascript
 var bar = null;
 console.log(typeof bar === "object");  // logs true!
 ```
@@ -1221,7 +1224,7 @@ console.log(typeof bar === "object");  // logs true!
 
 ## 2. What will the code below output to the console and why?
 
-```
+```javascript
 (function(){
   var a = b = 3;
 })();
@@ -1233,17 +1236,17 @@ console.log("b defined? " + (typeof b !== 'undefined'));
 Since both `a` and `b` are defined within the enclosing scope of the function, and since the line they are on begins with the var keyword, most JavaScript developers would expect typeof a and typeof b to both be undefined in the above example.
 
 However, that is not the case. The issue here is that most developers incorrectly understand the statement `var a = b = 3;` to be shorthand for:
-```
+```javascript
 var b = 3;
 var a = b;
 ```
 But in fact, var a = b = 3; is actually shorthand for:
-```
+```javascript
 b = 3;
 var a = b;
 ```
 As a result (if you are not using strict mode), the output of the code snippet would be:
-```
+```javascript
 a defined? false
 b defined? true
 ```
@@ -1252,7 +1255,7 @@ But how can b be defined outside of the scope of the enclosing function? Well, s
 Note that, in strict mode (i.e., with `use strict`), the statement `var a = b = 3;` will generate a runtime error of ReferenceError: `b` is not defined, thereby avoiding any headfakes/bugs that might othewise result. (Yet another prime example of why you should use use strict as a matter of course in your code!)
 
 ## 3. What will the code below output to the console and why?
-```
+```javascript
 var myObject = {
     foo: "bar",
     func: function() {
@@ -1269,7 +1272,7 @@ myObject.func();
 ```
 
 _Output_
-```
+```javascript
 outer func:  this.foo = bar
 outer func:  self.foo = bar
 inner func:  this.foo = undefined
@@ -1288,7 +1291,9 @@ This is an increasingly common practice, employed by many popular JavaScript lib
 
 Another feature of this technique is to allow for an easily referenceable (presumably shorter) alias for a global variable. This is often used, for example, in jQuery plugins. jQuery allows you to disable the $ reference to the jQuery namespace, using jQuery.noConflict(). If this has been done, your code can still use $ employing this closure technique, as follows:
 
-`(function($) { /* jQuery plugin code referencing $ */ } )(jQuery);`
+```javascript
+(function($) { /* jQuery plugin code referencing $ */ } )(jQuery);
+```
 
 ## 5. What is the significance, and what are the benefits, of including 'use strict' at the beginning of a JavaScript source file?
 
@@ -1311,7 +1316,7 @@ Some of the key benefits of strict mode include:
 
 ## 6. Consider the two functions below. Will they both return the same thing? Why or why not?
 
-```
+```javascript
 function foo1()
 {
   return {
@@ -1330,14 +1335,14 @@ function foo2()
 
 Surprisingly, these two functions will not return the same thing. Rather:
 
-```
+```javascript
 console.log("foo1 returns:");
 console.log(foo1());
 console.log("foo2 returns:");
 console.log(foo2());
 will yield:
 ```
-```
+```javascript
 foo1 returns:
 Object {bar: "hello"}
 foo2 returns:
