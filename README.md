@@ -48,7 +48,6 @@
 44. [Java: In the below example, how many String Objects are created?](#44-in-the-below-example-how-many-string-objects-are-created)
 45. [Java: What is multi-threading?](#45-what-is-multi-threading)
 
-
 ## JavaScript
 
 1. [What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
