@@ -59,6 +59,9 @@
 8. [JavaScript: What is NaN? What is its type? How can you reliably test if a value is equal to NaN?](#8-what-is-nan-what-is-its-type-how-can-you-reliably-test-if-a-value-is-equal-to-nan)
 9. [JavaScript: Discuss possible ways to write a function isInteger(x) that determines if x is an integer.](#9-discuss-possible-ways-to-write-a-function-isintegerx-that-determines-if-x-is-an-integer)
 
+## Algorithms
+1. [Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.]()
+
 
 ## 0. Up
 
@@ -1408,9 +1411,10 @@ A better solution would either be to use `value !== value`, which would only pro
 
 This may sound trivial and, in fact, it is trivial with ECMAscript 6 which introduces a new `Number.isInteger()` function for precisely this purpose. However, prior to ECMAScript 6, this is a bit more complicated, since no equivalent of the `Number.isInteger()` method is provided.
 
-The issue is that, in the ECMAScript specification, integers only exist conceptually; i.e., numeric values are **__always__** stored as floating point values.
+The issue is that, in the ECMAScript specification, integers only exist conceptually; i.e., numeric values are __always__ stored as floating point values.
 
-With that in mind, the simplest and cleanest pre-ECMAScript-6 solution (which is also sufficiently robust to return false even if a non-numeric value such as a string or null is passed to the function) would be the following use of the bitwise XOR operator:
+With that in mind, the simplest and cleanest pre-ECMAScript-6 solution (which is also sufficiently robust to return false even if a non-numeric value such as a string or null is passed to the function) would 
+be the following use of the bitwise XOR operator:
 
 ```javascript
 function isInteger(x) { return (x ^ 0) === x; } 
@@ -1445,6 +1449,57 @@ While this `parseInt`-based approach will work well for many values of x, once x
 1
 > parseInt(1000000000000000000000, 10) === 1000000000000000000000
 false
+```
+
+## 10. In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?
+```javascript
+(function() {
+    console.log(1); 
+    setTimeout(function(){console.log(2)}, 1000); 
+    setTimeout(function(){console.log(3)}, 0); 
+    console.log(4);
+})();
+```
+
+The values will be logged in the following order:
+```
+1
+4
+3
+2
+```
+Let’s first explain the parts of this that are presumably more obvious:
+
+* 1 and 4 are displayed first since they are logged by simple calls to console.log() without any delay
+* 2 is displayed after 3 because 2 is being logged after a delay of 1000 msecs (i.e., 1 second) whereas 3 is being logged after a delay of 0 msecs.
+
+OK, fine. But if 3 is being logged after a delay of 0 msecs, doesn’t that mean that it is being logged right away? And, if so, shouldn’t it be logged before 4, since 4 is being logged by a later line of code?
+
+The answer has to do with properly understanding JavaScript events and timing.
+
+The browser has an event loop which checks the event queue and processes pending events. For example, if an event happens in the background (e.g., a script onload event) while the browser is busy (e.g., processing an onclick), the event gets appended to the queue. When the onclick handler is complete, the queue is checked and the event is then handled (e.g., the onload script is executed).
+
+Similarly, `setTimeout()` also puts execution of its referenced function into the event queue if the browser is busy.
+
+When a value of zero is passed as the second argument to `setTimeout()`, it attempts to execute the specified function “as soon as possible”. Specifically, execution of the function is placed on the event queue to occur on the next timer tick. Note, though, that this is not immediate; the function is not executed until the next tick. That’s why in the above example, the call to console.log(4) occurs before the call to console.log(3) (since the call to console.log(3) is invoked via setTimeout, so it is slightly delayed).
+
+# Algorithms
+
+1. Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.
+
+```javascript
+function isPalindrome(str) {
+  str = str.replace(/\W/g, '').toLowerCase();
+  return (str == str.split('').reverse().join(''));
+}
+```
+
+For example:
+
+```javascript
+console.log(isPalindrome("level"));                   // logs 'true'
+console.log(isPalindrome("levels"));                  // logs 'false'
+console.log(isPalindrome("A car, a man, a maraca"));  // logs 'true'
 ```
 
 [up](#0-up)
