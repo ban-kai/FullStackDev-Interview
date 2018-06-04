@@ -1,50 +1,50 @@
 # Java Interview Questions Compilation
-
-1. [Explain JVM, JRE and JDK? ](#1-explain-jvm-jre-and-jdk)
-2. [Is Java a Compiled or an Interpreted programming language ?](#2-is-java-a-compiled-or-an-interpreted-programming-language-)
-3. [Why java is not 100% Object-oriented?](#3-why-java-is-not-100-object-oriented)
-4. [What are wrapper classes?](#4-what-are-wrapper-classes)
-5. [What is singleton class and how can we make a class singleton?](#5-what-is-singleton-class-and-how-can-we-make-a-class-singleton)
-6. [What is the difference between Array list and vector?](#6-what-is-the-difference-between-array-list-and-vector)
-7. [What is the difference between equals() and == ?](#7--what-is-the-difference-between-equals-and--)
-8. [What are the differences between Heap and Stack Memory?](#8-what-are-the-differences-between-heap-and-stack-memory)
-9. [What is Polymorphism?](#9-what-is-polymorphism)
-10. [What are the OOP Concepts in Java?](#10-what-are-the-oop-concepts-in-java)
-11. [What is the difference between abstract classes and interfaces?](#11-what-is-the-difference-between-abstract-classes-and-interfaces)
-12. [What is method overloading and method overriding?](#12-what-is-method-overloading-and-method-overriding)
-13. [Can you override a private or static method in Java?](#13-can-you-override-a-private-or-static-method-in-java)
-14. [What is multiple inheritance? Is it supported by Java?](#14-what-is-multiple-inheritance-is-it-supported-by-java)
-15. [What is association?](#15-what-is-association)
-16. [Is Java platform independent?](#16-is-java-platform-independent)
-17. [What are the various access specifiers for Java classes?](#17-what-are-the-various-access-specifiers-for-java-classes)
-18. [What all memory areas are allocated by JVM?](#18-what-all-memory-areas-are-allocated-by-jvm)
-19. [What’s the purpose of Static methods and static variables?](#19-whats-the-purpose-of-static-methods-and-static-variables)
-20. [What is class?](#20-what-is-a-class)
-21. [What is data encapsulation and what’s its significance?](#21-what-is-data-encapsulation-and-whats-its-significance)
-22. [Primivite data types in Java and their size](#22-primitive-data-types-in-java-and-their-size)
-23. [What is unicode?](#23-what-is-unicode)
-24. [What are Literals?](#24-what-are-literals)
-25. [What is Type casting in Java?](#25-what-is-type-casting-in-java)
-26. [Why should I have super type reference & sub class object?](#26-why-should-i-have-super-type-reference--sub-class-object)
-27. [What is the difference between double and float variables in Java?](#27-what-is-the-difference-between-double-and-float-variables-in-java)
-28. [Can we override a static method?](#28-can-we-override-a-static-method)
-29. [Does Java support operator overloading?](#29-does-java-support-operator-overloading)
-30. [Can we overload a method by just changing the return type and without changing the signature of method?](#30-can-we-overload-a-method-by-just-changing-the-return-type-and-without-changing-the-signature-of-method)
-31. [Is it possible to overload main() method of a class?](#31-is-it-possible-to-overload-main-method-of-a-class)
-32. [What is the difference between an Inner Class and a Sub-Class?](#32-what-is-the-difference-between-an-inner-class-and-a-sub-class)
-33. [What is static and dynamic binding?](#33-what-is-static-and-dynamic-binding)
-34. [What is the difference between abstract class and interface?](#34-what-is-the-difference-between-abstract-class-and-interface)
-35. [Can Java interfaces have fields?](#35-can-java-interfaces-have-fields)
-36. [Which access modifiers can be applied to the inner classes?](#36-which-access-modifiers-can-be-applied-to-the-inner-classes)
-37. [Can main() method in Java can return any data?](#37-can-main-method-in-java-can-return-any-data)
-38. [Can we declare a class as Abstract without having any abstract method?](#38-can-we-declare-a-class-as-abstract-without-having-any-abstract-method)
-39. [Is Java “pass-by-reference” or “pass-by-value”?](#39-is-java-pass-by-reference-or-pass-by-value)
-40. [What is static block?](#40-what-is-static-block)
-41. [Use of final keyword in Java](#41-use-of-final-keyword-in-java)
-42. [How an object is serialized in java?](#42-how-an-object-is-serialized-in-java)
-43. [What are the types of exceptions?](#43-what-are-the-types-of-exceptions)
-44. [In the below example, how many String Objects are created?](#44-in-the-below-example-how-many-string-objects-are-created)
-45. [What is multi-threading?](#45-what-is-multi-threading)
+| java| javascript|
+| ----------------------------------------------------------- | ---------------------------------------------------------- |
+|1. [Explain JVM, JRE and JDK? ](#1-explain-jvm-jre-and-jdk) | 1. [Explain JVM, JRE and JDK?  ||2. [Is Java a Compiled or an Interpreted programming language ?](#2-is-java-a-compiled-or-an-interpreted-programming-language-)| 2. [Is Java a Compiled or an I |
+|3. [Why java is not 100% Object-oriented?](#3-why-java-is-not-100-object-oriented)| 3. [Why java is not 100% Objec |
+|4. [What are wrapper classes?](#4-what-are-wrapper-classes)| 4. [What are wrapper classes?] |
+|5. [What is singleton class and how can we make a class singleton?](#5-what-is-singleton-class-and-how-can-we-make-a-class-singleton)| 5. [What is singleton class an |
+|6. [What is the difference between Array list and vector?](#6-what-is-the-difference-between-array-list-and-vector)| 6. [What is the difference bet |
+|7. [What is the difference between equals() and == ?](#7--what-is-the-difference-between-equals-and--)| 7. [What is the difference bet |
+|8. [What are the differences between Heap and Stack Memory?](#8-what-are-the-differences-between-heap-and-stack-memory)| 8. [What are the differences b |
+|9. [What is Polymorphism?](#9-what-is-polymorphism)| 9. [What is Polymorphism?](#9- |
+|10. [What are the OOP Concepts in Java?](#10-what-are-the-oop-concepts-in-java)| 10. [What are the OOP Concepts |
+|11. [What is the difference between abstract classes and interfaces?](#11-what-is-the-difference-between-abstract-classes-and-interfaces)| 11. [What is the difference be |
+|12. [What is method overloading and method overriding?](#12-what-is-method-overloading-and-method-overriding)| 12. [What is method overloadin |
+|13. [Can you override a private or static method in Java?](#13-can-you-override-a-private-or-static-method-in-java)| 13. [Can you override a privat |
+|14. [What is multiple inheritance? Is it supported by Java?](#14-what-is-multiple-inheritance-is-it-supported-by-java)| 14. [What is multiple inherita |
+|15. [What is association?](#15-what-is-association)| 15. [What is association?](#15 |
+|16. [Is Java platform independent?](#16-is-java-platform-independent)| 16. [Is Java platform independ |
+|17. [What are the various access specifiers for Java classes?](#17-what-are-the-various-access-specifiers-for-java-classes)| 17. [What are the various acce |
+|18. [What all memory areas are allocated by JVM?](#18-what-all-memory-areas-are-allocated-by-jvm)| 18. [What all memory areas are |
+|19. [What’s the purpose of Static methods and static variables?](#19-whats-the-purpose-of-static-methods-and-static-variables)| 19. [What’s the purpose of Sta |
+|20. [What is class?](#20-what-is-a-class)| 20. [What is class?](#20-what- |
+|21. [What is data encapsulation and what’s its significance?](#21-what-is-data-encapsulation-and-whats-its-significance)| 21. [What is data encapsulatio |
+|22. [Primivite data types in Java and their size](#22-primitive-data-types-in-java-and-their-size)| 22. [Primivite data types in J |
+|23. [What is unicode?](#23-what-is-unicode)| 23. [What is unicode?](#23-wha |
+|24. [What are Literals?](#24-what-are-literals)|
+|25. [What is Type casting in Java?](#25-what-is-type-casting-in-java)|
+|26. [Why should I have super type reference & sub class object?](#26-why-should-i-have-super-type-reference--sub-class-object)|
+|27. [What is the difference between double and float variables in Java?](#27-what-is-the-difference-between-double-and-float-variables-in-java)|
+|28. [Can we override a static method?](#28-can-we-override-a-static-method)|
+|29. [Does Java support operator overloading?](#29-does-java-support-operator-overloading)|
+|30. [Can we overload a method by just changing the return type and without changing the signature of method?](#30-can-we-overload-a-method-by-just-changing-the-return-type-and-without-changing-the-signature-of-method)|
+31. [Is it possible to overload main() method of a class?](#31-is-it-possible-to-overload-main-method-of-a-class)|
+|32. [What is the difference between an Inner Class and a Sub-Class?](#32-what-is-the-difference-between-an-inner-class-and-a-sub-class)|
+|33. [What is static and dynamic binding?](#33-what-is-static-and-dynamic-binding)|
+|34. [What is the difference between abstract class and interface?](#34-what-is-the-difference-between-abstract-class-and-interface)|
+|35. [Can Java interfaces have fields?](#35-can-java-interfaces-have-fields)|
+|36. [Which access modifiers can be applied to the inner classes?](#36-which-access-modifiers-can-be-applied-to-the-inner-classes)|
+|37. [Can main() method in Java can return any data?](#37-can-main-method-in-java-can-return-any-data)|
+|38. [Can we declare a class as Abstract without having any abstract method?](#38-can-we-declare-a-class-as-abstract-without-having-any-abstract-method)|
+|39. [Is Java “pass-by-reference” or “pass-by-value”?](#39-is-java-pass-by-reference-or-pass-by-value)|
+|40. [What is static block?](#40-what-is-static-block)|
+|41. [Use of final keyword in Java](#41-use-of-final-keyword-in-java)|
+|42. [How an object is serialized in java?](#42-how-an-object-is-serialized-in-java)|
+|43. [What are the types of exceptions?](#43-what-are-the-types-of-exceptions)|
+|44. [In the below example, how many String Objects are created?](#44-in-the-below-example-how-many-string-objects-are-created)|
+|45. [What is multi-threading?](#45-what-is-multi-threading)|
 
 
 
