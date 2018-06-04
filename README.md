@@ -58,6 +58,7 @@
 7. [JavaScript: What will the code below output? Explain your answer](#7-what-will-the-code-below-output-explain-your-answer)
 8. [JavaScript: What is NaN? What is its type? How can you reliably test if a value is equal to NaN?](#8-what-is-nan-what-is-its-type-how-can-you-reliably-test-if-a-value-is-equal-to-nan)
 9. [JavaScript: Discuss possible ways to write a function isInteger(x) that determines if x is an integer.](#9-discuss-possible-ways-to-write-a-function-isintegerx-that-determines-if-x-is-an-integer)
+10. [In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?](#10-in-what-order-will-the-numbers-1-4-be-logged-to-the-console-when-the-code-below-is-executed-why)
 
 ## Algorithms
 1. [Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.]()
@@ -1485,7 +1486,7 @@ When a value of zero is passed as the second argument to `setTimeout()`, it atte
 
 # Algorithms
 
-1. Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.
+## 1. Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.
 
 ```javascript
 function isPalindrome(str) {
