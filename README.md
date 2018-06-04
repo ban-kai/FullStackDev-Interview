@@ -1,4 +1,4 @@
-# Java Interview Questions Compilation
+# __Full Stack Developer Interview Questions__ 
 1. [Explain JVM, JRE and JDK? ](#1-explain-jvm-jre-and-jdk)
 2. [Is Java a Compiled or an Interpreted programming language ?](#2-is-java-a-compiled-or-an-interpreted-programming-language-)
 3. [Why java is not 100% Object-oriented?](#3-why-java-is-not-100-object-oriented)
