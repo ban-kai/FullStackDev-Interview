@@ -58,7 +58,8 @@
 7. [JavaScript: What will the code below output? Explain your answer](#7-what-will-the-code-below-output-explain-your-answer)
 8. [JavaScript: What is NaN? What is its type? How can you reliably test if a value is equal to NaN?](#8-what-is-nan-what-is-its-type-how-can-you-reliably-test-if-a-value-is-equal-to-nan)
 9. [JavaScript: Discuss possible ways to write a function isInteger(x) that determines if x is an integer.](#9-discuss-possible-ways-to-write-a-function-isintegerx-that-determines-if-x-is-an-integer)
-10. [In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?](#10-in-what-order-will-the-numbers-1-4-be-logged-to-the-console-when-the-code-below-is-executed-why)
+10. [JavaScript: In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?](#10-in-what-order-will-the-numbers-1-4-be-logged-to-the-console-when-the-code-below-is-executed-why)
+11. [JavaScript: Consider the following code snippet]()
 
 ## Algorithms
 1. [Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.](#1-write-a-simple-function-less-than-160-characters-that-returns-a-boolean-indicating-whether-or-not-a-string-is-a-palindrome)
@@ -1480,6 +1481,73 @@ The browser has an event loop which checks the event queue and processes pending
 Similarly, `setTimeout()` also puts execution of its referenced function into the event queue if the browser is busy.
 
 When a value of zero is passed as the second argument to `setTimeout()`, it attempts to execute the specified function “as soon as possible”. Specifically, execution of the function is placed on the event queue to occur on the next timer tick. Note, though, that this is not immediate; the function is not executed until the next tick. That’s why in the above example, the call to console.log(4) occurs before the call to console.log(3) (since the call to console.log(3) is invoked via setTimeout, so it is slightly delayed).
+
+## 11. Consider the following code snippet:
+
+```javascript
+for (var i = 0; i < 5; i++) {
+  var btn = document.createElement('button');
+  btn.appendChild(document.createTextNode('Button ' + i));
+  btn.addEventListener('click', function(){ console.log(i); });
+  document.body.appendChild(btn);
+}
+```
+
+(a) What gets logged to the console when the user clicks on “Button 4” and why?
+
+(b) Provide one or more alternate implementations that will work as expected.
+
+Answers:
+
+(a) No matter what button the user clicks the number 5 will always be logged to the console. This is because, at the point that the onclick method is invoked (for any of the buttons), the for loop has already completed and the variable i already has a value of 5. (Bonus points for the interviewee if they know enough to talk about how execution contexts, variable objects, activation objects, and the internal “scope” property contribute to the closure behavior.)
+
+(b) The key to making this work is to capture the value of i at each pass through the for loop by passing it into a newly created function object. Here are four possible ways to accomplish this:
+
+```javascript
+for (var i = 0; i < 5; i++) {
+  var btn = document.createElement('button');
+  btn.appendChild(document.createTextNode('Button ' + i));
+  btn.addEventListener('click', (function(i) {
+    return function() { console.log(i); };
+  })(i));
+  document.body.appendChild(btn);
+}
+```
+
+Alternatively, you could wrap the entire call to btn.addEventListener in the new anonymous function:
+
+```javascript
+for (var i = 0; i < 5; i++) {
+  var btn = document.createElement('button');
+  btn.appendChild(document.createTextNode('Button ' + i));
+  (function (i) {
+    btn.addEventListener('click', function() { console.log(i); });
+  })(i);
+  document.body.appendChild(btn);
+}
+```
+
+Or, we could replace the for loop with a call to the array object’s native forEach method:
+
+```javascript
+['a', 'b', 'c', 'd', 'e'].forEach(function (value, i) {
+  var btn = document.createElement('button');
+  btn.appendChild(document.createTextNode('Button ' + i));
+  btn.addEventListener('click', function() { console.log(i); });
+  document.body.appendChild(btn);
+});
+```
+
+Lastly, the simplest solution, if you’re in an ES6/ES2015 context, is to use let i instead of var i:
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  var btn = document.createElement('button');
+  btn.appendChild(document.createTextNode('Button ' + i));
+  btn.addEventListener('click', function(){ console.log(i); });
+  document.body.appendChild(btn);
+}
+```
 
 # Algorithms Part
 
