@@ -1,4 +1,7 @@
 # __Full Stack Developer Interview Questions__ 
+
+## Java
+
 1. [Explain JVM, JRE and JDK? ](#1-explain-jvm-jre-and-jdk)
 2. [Is Java a Compiled or an Interpreted programming language ?](#2-is-java-a-compiled-or-an-interpreted-programming-language-)
 3. [Why java is not 100% Object-oriented?](#3-why-java-is-not-100-object-oriented)
@@ -44,6 +47,9 @@
 43. [What are the types of exceptions?](#43-what-are-the-types-of-exceptions)
 44. [In the below example, how many String Objects are created?](#44-in-the-below-example-how-many-string-objects-are-created)
 45. [What is multi-threading?](#45-what-is-multi-threading)
+
+## JavaScript
+
 
 
 
