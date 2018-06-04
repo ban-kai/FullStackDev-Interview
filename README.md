@@ -52,9 +52,8 @@
 ## JavaScript
 
 
-JS1. [What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#js1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
-JS2. [What will the code below output to the console and why?](#s2-what-will-the-code-below-output-to-the-console-and-why)
-
+1. [What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
+2. [What will the code below output to the console and why?](#2-what-will-the-code-below-output-to-the-console-and-why)
 
 
 ## 0. Up
@@ -1209,7 +1208,7 @@ Multithreading is a programming concept to run multiple tasks in a concurrent ma
 
 
 
-## JS1. What is a potential pitfall with using `typeof bar === "object"` to determine if bar is an object? How can this pitfall be avoided?
+## 1. What is a potential pitfall with using `typeof bar === "object"` to determine if bar is an object? How can this pitfall be avoided?
 
 Although `typeof bar === "object"` is a reliable way of checking if bar is an object, the surprising gotcha in JavaScript is that null is also considered an object!
 
@@ -1219,7 +1218,7 @@ console.log(typeof bar === "object");  // logs true!
 ```
 
 
-## JS2. What will the code below output to the console and why?
+## 2. What will the code below output to the console and why?
 
 ```
 (function(){
@@ -1251,7 +1250,7 @@ But how can b be defined outside of the scope of the enclosing function? Well, s
 
 Note that, in strict mode (i.e., with `use strict`), the statement `var a = b = 3;` will generate a runtime error of ReferenceError: `b` is not defined, thereby avoiding any headfakes/bugs that might othewise result. (Yet another prime example of why you should use use strict as a matter of course in your code!)
 
-## JS3. What will the code below output to the console and why?
+## 3. What will the code below output to the console and why?
 ```
 var myObject = {
     foo: "bar",
@@ -1280,7 +1279,7 @@ In the outer function, both `this` and `self` refer to myObject and therefore bo
 
 In the inner function, though, `this` no longer refers to myObject. As a result, `this.foo` is undefined in the inner function, whereas the reference to the local variable `self` remains in scope and is accessible there.
 
-## JS4. What is the significance of, and reason for, wrapping the entire content of a JavaScript source file in a function block?
+## 4. What is the significance of, and reason for, wrapping the entire content of a JavaScript source file in a function block?
 
 IFFY => Immediately-invoked function expression.
 
@@ -1290,7 +1289,7 @@ Another feature of this technique is to allow for an easily referenceable (presu
 
 `(function($) { /* jQuery plugin code referencing $ */ } )(jQuery);`
 
-## JS5. What is the significance, and what are the benefits, of including 'use strict' at the beginning of a JavaScript source file?
+## 5. What is the significance, and what are the benefits, of including 'use strict' at the beginning of a JavaScript source file?
 
 The short and most important answer here is that `use strict` is a way to voluntarily enforce stricter parsing and error handling on your JavaScript code at runtime. Code errors that would otherwise have been ignored or would have failed silently will now generate errors or throw exceptions. In general, it is a good practice.
 
@@ -1309,7 +1308,7 @@ Some of the key benefits of strict mode include:
 
 * Throws error on invalid usage of `delete`. The `delete` operator (used to remove properties from objects) cannot be used on non-configurable properties of the object. Non-strict code will fail silently when an attempt is made to delete a non-configurable property, whereas strict mode will throw an error in such a case.
 
-## JS6. Consider the two functions below. Will they both return the same thing? Why or why not?
+## 6. Consider the two functions below. Will they both return the same thing? Why or why not?
 
 ```
 function foo1()
