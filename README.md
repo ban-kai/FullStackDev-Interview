@@ -47,6 +47,8 @@
 43. [Java: What are the types of exceptions?](#43-what-are-the-types-of-exceptions)
 44. [Java: In the below example, how many String Objects are created?](#44-in-the-below-example-how-many-string-objects-are-created)
 45. [Java: What is multi-threading?](#45-what-is-multi-threading)
+46. [Java: Describe and compare fail-fast and fail-safe iterators. Give examples.]()
+47. [Java: ArrayList, LinkedList, and Vector are all implementations of the List interface. Which of them is most efficient for adding and removing elements from the list? Explain your answer, including any other alternatives you may be aware of.]()
 
 ## JavaScript
 1. [JavaScript: What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
@@ -1214,6 +1216,24 @@ assertThat(constantString1).isSameAs(constantString2);
 ## 45. What is multi-threading?
 
 Multithreading is a programming concept to run multiple tasks in a concurrent manner within a single program. Threads share same process stack and running in parallel. It helps in performance improvement of any program.
+
+## 46. Describe and compare fail-fast and fail-safe iterators. Give examples.
+
+The main distinction between fail-fast and fail-safe iterators is whether or not the collection can be modified while it is being iterated. Fail-safe iterators allow this; fail-fast iterators do not.
+
+__Fail-fast__ iterators operate directly on the collection itself. During iteration, fail-fast iterators fail as soon as they realize that the collection has been modified (i.e., upon realizing that a member has been added, modified, or removed) and will throw a ConcurrentModificationException. Some examples include ArrayList, HashSet, and HashMap (most JDK1.4 collections are implemented to be fail-fast).
+
+__Fail-safe__ iterates operate on a cloned copy of the collection and therefore do not throw an exception if the collection is modified during iteration. Examples would include iterators returned by ConcurrentHashMap or CopyOnWriteArrayList.
+
+## 47. ArrayList, LinkedList, and Vector are all implementations of the List interface. Which of them is most efficient for adding and removing elements from the list? Explain your answer, including any other alternatives you may be aware of.
+
+Of the three, LinkedList is generally going to give you the best performance. Here’s why:
+
+* ArrayList and Vector each use an array to store the elements of the list. As a result, when an element is inserted into (or removed from) the middle of the list, the elements that follow must all be shifted accordingly. Vector is synchronized, so if a thread-safe implementation is not needed, it is recommended to use ArrayList rather than Vector.
+
+* LinkedList, on the other hand, is implemented using a doubly linked list. As a result, an inserting or removing an element only requires updating the links that immediately precede and follow the element being inserted or removed.
+
+However, it is worth noting that if performance is that critical, it’s better to just use an array and manage it yourself, or use one of the high performance 3rd party packages such as Trove or HPPC.
 
 # JavaScript Part
 
