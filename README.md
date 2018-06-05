@@ -51,7 +51,7 @@
 47. [Java: ArrayList, LinkedList, and Vector are all implementations of the List interface. Which of them is most efficient for adding and removing elements from the list? Explain your answer, including any other alternatives you may be aware of.](#47-arraylist-linkedlist-and-vector-are-all-implementations-of-the-list-interface-which-of-them-is-most-efficient-for-adding-and-removing-elements-from-the-list-explain-your-answer-including-any-other-alternatives-you-may-be-aware-of)
 48. [Java: Why would it be more secure to store sensitive data (such as a password, social security number, etc.) in a character array rather than in a String?](#48-why-would-it-be-more-secure-to-store-sensitive-data-such-as-a-password-social-security-number-etc-in-a-character-array-rather-than-in-a-string)
 49. [Java: What is the ThreadLocal class? How and why would you use it?](#49-what-is-the-threadlocal-class-how-and-why-would-you-use-it)
-50. [Java: What is the volatile keyword? How and why would you use it?]()
+50. [Java: What is the volatile keyword? How and why would you use it?](#50-what-is-the-volatile-keyword-how-and-why-would-you-use-it)
 
 ## JavaScript
 1. [JavaScript: What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
