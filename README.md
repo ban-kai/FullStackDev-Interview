@@ -57,7 +57,7 @@
 53. [Java: Tail recursion is functionally equivalent to iteration. Since Java does not yet support tail call optimization, describe how to transform a simple tail recursive function into a loop and why one is typically preferred over the other.](#53-tail-recursion-is-functionally-equivalent-to-iteration-since-java-does-not-yet-support-tail-call-optimization-describe-how-to-transform-a-simple-tail-recursive-function-into-a-loop-and-why-one-is-typically-preferred-over-the-other)
 54. [Java: How can you catch an exception thrown by another thread in Java?](#54-how-can-you-catch-an-exception-thrown-by-another-thread-in-java)
 55. [Java: When designing an abstract class, why should you avoid calling abstract methods inside its constructor?](#55-when-designing-an-abstract-class-why-should-you-avoid-calling-abstract-methods-inside-its-constructor)
-56. [Java: What variance is imposed on generic type parameters? How much control does Java give you over this?](56-what-variance-is-imposed-on-generic-type-parameters-how-much-control-does-java-give-you-over-this)
+56. [Java: What variance is imposed on generic type parameters? How much control does Java give you over this?](#56-what-variance-is-imposed-on-generic-type-parameters-how-much-control-does-java-give-you-over-this)
 57. [Java: If one needs a Set, how do you choose between HashSet vs. TreeSet?](#57-if-one-needs-a-set-how-do-you-choose-between-hashset-vs-treeset)
 58. [Java: What are method references, and how are they useful?](#58-what-are-method-references-and-how-are-they-useful)
 59. [Java: How are Java enums more powerful than integer constants? How can this capability be used?](#59-how-are-java-enums-more-powerful-than-integer-constants-how-can-this-capability-be-used)
