@@ -52,6 +52,7 @@
 48. [Java: Why would it be more secure to store sensitive data (such as a password, social security number, etc.) in a character array rather than in a String?](#48-why-would-it-be-more-secure-to-store-sensitive-data-such-as-a-password-social-security-number-etc-in-a-character-array-rather-than-in-a-string)
 49. [Java: What is the ThreadLocal class? How and why would you use it?](#49-what-is-the-threadlocal-class-how-and-why-would-you-use-it)
 50. [Java: What is the volatile keyword? How and why would you use it?](#50-what-is-the-volatile-keyword-how-and-why-would-you-use-it)
+51. [Java: What is stale state?]()
 
 ## JavaScript
 1. [JavaScript: What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
@@ -1298,6 +1299,15 @@ public class Foo extends Thread {
     }
 }
 ```
+## 51. What is stale state? 
+
+Stale state is information in an object that does not reflect reality.
+
+Example: an object's members are filled with information from a database, but the underlying data in the database has changed since the object was filled.
+
+Dangerously stale state is stale state that might adversely affect the operation of a program, i.e. causing it to perform incorrectly due to invalid assumptions about the data's integrity.
+
+In computer processing, if a processor changes the value of an operand and then, at a subsequent time, fetches the operand and obtains the old rather than the new value of the operand, then it is said to have seen stale data.
 
 
 # JavaScript Part
