@@ -47,11 +47,11 @@
 43. [Java: What are the types of exceptions?](#43-what-are-the-types-of-exceptions)
 44. [Java: In the below example, how many String Objects are created?](#44-in-the-below-example-how-many-string-objects-are-created)
 45. [Java: What is multi-threading?](#45-what-is-multi-threading)
-46. [Java: Describe and compare fail-fast and fail-safe iterators. Give examples.]()
-47. [Java: ArrayList, LinkedList, and Vector are all implementations of the List interface. Which of them is most efficient for adding and removing elements from the list? Explain your answer, including any other alternatives you may be aware of.]()
-48. [Java: Why would it be more secure to store sensitive data (such as a password, social security number, etc.) in a character array rather than in a String?]()
-49. [Java: What is the ThreadLocal class? How and why would you use it?]()
-50. [Java: ]
+46. [Java: Describe and compare fail-fast and fail-safe iterators. Give examples.](#46-describe-and-compare-fail-fast-and-fail-safe-iterators-give-examples)
+47. [Java: ArrayList, LinkedList, and Vector are all implementations of the List interface. Which of them is most efficient for adding and removing elements from the list? Explain your answer, including any other alternatives you may be aware of.](#47-arraylist-linkedlist-and-vector-are-all-implementations-of-the-list-interface-which-of-them-is-most-efficient-for-adding-and-removing-elements-from-the-list-explain-your-answer-including-any-other-alternatives-you-may-be-aware-of)
+48. [Java: Why would it be more secure to store sensitive data (such as a password, social security number, etc.) in a character array rather than in a String?](#48-why-would-it-be-more-secure-to-store-sensitive-data-such-as-a-password-social-security-number-etc-in-a-character-array-rather-than-in-a-string)
+49. [Java: What is the ThreadLocal class? How and why would you use it?](#49-what-is-the-threadlocal-class-how-and-why-would-you-use-it)
+50. [Java: What is the volatile keyword? How and why would you use it?]()
 
 ## JavaScript
 1. [JavaScript: What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
@@ -1270,6 +1270,34 @@ public class ThreadId {
 
 Each thread holds an implicit reference to its copy of a thread-local variable as long as the thread is alive and the ThreadLocal instance is accessible; after a thread goes away, all of its copies of thread-local instances are subject to garbage collection (unless other references to these copies exist).
 
+## 50. What is the volatile keyword? How and why would you use it?
+
+In Java, each thread has its own stack, including its own copy of variables it can access. When the thread is created, it copies the value of all accessible variables into its own stack. The volatile keyword basically says to the JVM “Warning, this variable may be modified in another Thread”.
+
+In all versions of Java, the volatile keyword guarantees global ordering on reads and writes to a variable. This implies that every thread accessing a volatile field will read the variable’s current value instead of (potentially) using a cached value.
+
+In Java 5 or later, volatile reads and writes establish a happens-before relationship, much like acquiring and releasing a mutex.
+
+Using volatile may be faster than a lock, but it will not work in some situations. The range of situations in which volatile is effective was expanded in Java 5; in particular, double-checked locking now works correctly.
+
+The volatile keyword is also useful for 64-bit types like long and double since they are written in two operations. Without the volatile keyword you risk stale or invalid values.
+
+One common example for using volatile is for a flag to terminate a thread. If you’ve started a thread, and you want to be able to safely interrupt it from a different thread, you can have the thread periodically check a flag (i.e., to stop it, set the flag to true). By making the flag volatile, you can ensure that the thread that is checking its value will see that it has been set to true without even having to use a synchronized block. For example:
+
+```java
+public class Foo extends Thread {
+    private volatile boolean close = false;
+    public void run() {
+        while(!close) {
+            // do work
+        }
+    }
+    public void close() {
+        close = true;
+        // interrupt here if needed
+    }
+}
+```
 
 
 # JavaScript Part
