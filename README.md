@@ -62,7 +62,7 @@
 11. [JavaScript: Consider the following code snippet](#11-consider-the-following-code-snippet)
 
 ## Algorithms
-1. [Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.](#1-write-a-simple-function-less-than-160-characters-that-returns-a-boolean-indicating-whether-or-not-a-string-is-a-palindrome)
+1. [Algorithms: Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.](#1-write-a-simple-function-less-than-160-characters-that-returns-a-boolean-indicating-whether-or-not-a-string-is-a-palindrome)
 
 # Java Part
 
