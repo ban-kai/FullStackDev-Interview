@@ -53,18 +53,18 @@
 49. [Java: What is the ThreadLocal class? How and why would you use it?](#49-what-is-the-threadlocal-class-how-and-why-would-you-use-it)
 50. [Java: What is the volatile keyword? How and why would you use it?](#50-what-is-the-volatile-keyword-how-and-why-would-you-use-it)
 51. [Java: What is stale state?](#51-what-is-stale-state)
-52. [Java: Compare the sleep() and wait() methods in Java, including when and why you would use one vs. the other.]()
-53. [Java: Tail recursion is functionally equivalent to iteration. Since Java does not yet support tail call optimization, describe how to transform a simple tail recursive function into a loop and why one is typically preferred over the other.]()
-54. [Java: How can you catch an exception thrown by another thread in Java?]()
-55. [Java: When designing an abstract class, why should you avoid calling abstract methods inside its constructor?]()
-56. [Java: What variance is imposed on generic type parameters? How much control does Java give you over this?]()
-57. [Java: If one needs a Set, how do you choose between HashSet vs. TreeSet?]()
-58. [Java: What are method references, and how are they useful?]()
-59. [Java: How are Java enums more powerful than integer constants? How can this capability be used?]()
-60. [Java: What is reflection? Give an example of functionality that can only be implemented using reflection.]()
-61. [Java: What are static initializers and when would you use them?]()
-62. [Java: Nested classes can be static or non-static (also called an inner class). How do you decide which to use? Does it matter? When exactly is it leak safe to use (anonymous) inner classes?]()
-63. [Java: What is the difference between String s = "Test" and String s = new String("Test")? Which is better and why?]()
+52. [Java: Compare the sleep() and wait() methods in Java, including when and why you would use one vs. the other.](#52-compare-the-sleep-and-wait-methods-in-java-including-when-and-why-you-would-use-one-vs-the-other)
+53. [Java: Tail recursion is functionally equivalent to iteration. Since Java does not yet support tail call optimization, describe how to transform a simple tail recursive function into a loop and why one is typically preferred over the other.](#53-tail-recursion-is-functionally-equivalent-to-iteration-since-java-does-not-yet-support-tail-call-optimization-describe-how-to-transform-a-simple-tail-recursive-function-into-a-loop-and-why-one-is-typically-preferred-over-the-other)
+54. [Java: How can you catch an exception thrown by another thread in Java?](#54-how-can-you-catch-an-exception-thrown-by-another-thread-in-java)
+55. [Java: When designing an abstract class, why should you avoid calling abstract methods inside its constructor?](#55-when-designing-an-abstract-class-why-should-you-avoid-calling-abstract-methods-inside-its-constructor)
+56. [Java: What variance is imposed on generic type parameters? How much control does Java give you over this?](56-what-variance-is-imposed-on-generic-type-parameters-how-much-control-does-java-give-you-over-this)
+57. [Java: If one needs a Set, how do you choose between HashSet vs. TreeSet?](#57-if-one-needs-a-set-how-do-you-choose-between-hashset-vs-treeset)
+58. [Java: What are method references, and how are they useful?](#58-what-are-method-references-and-how-are-they-useful)
+59. [Java: How are Java enums more powerful than integer constants? How can this capability be used?](#59-how-are-java-enums-more-powerful-than-integer-constants-how-can-this-capability-be-used)
+60. [Java: What is reflection? Give an example of functionality that can only be implemented using reflection.](#60-what-is-reflection-give-an-example-of-functionality-that-can-only-be-implemented-using-reflection)
+61. [Java: What are static initializers and when would you use them?](#61-what-are-static-initializers-and-when-would-you-use-them)
+62. [Java: Nested classes can be static or non-static (also called an inner class). How do you decide which to use? Does it matter? When exactly is it leak safe to use (anonymous) inner classes?](#62-nested-classes-can-be-static-or-non-static-also-called-an-inner-class-how-do-you-decide-which-to-use-does-it-matter-when-exactly-is-it-leak-safe-to-use-anonymous-inner-classes)
+63. [Java: What is the difference between String s = "Test" and String s = new String("Test")? Which is better and why?](#63-what-is-the-difference-between-string-s--test-and-string-s--new-stringtest-which-is-better-and-why)
 
 
 ## JavaScript
@@ -1462,7 +1462,7 @@ Avoid calling abstract methods in your abstract classes’ constructors, as it r
 
 ## 56. What variance is imposed on generic type parameters? How much control does Java give you over this?
 
-Java’s generic type parameters are invariant. This means for any distinct types A and B, G<A> is not a subtype or supertype of G<B>. As a real world example, `List<String>` is not a supertype or subtype of `List<Object>`. So even though String extends (i.e. is a subtype of) Object, both of the following assignments will fail to compile:
+Java’s generic type parameters are invariant. This means for any distinct types A and B, `G<A>` is not a subtype or supertype of `G<B>`. As a real world example, `List<String>` is not a supertype or subtype of `List<Object>`. So even though String extends (i.e. is a subtype of) Object, both of the following assignments will fail to compile:
 
 ```java
 List<String> strings = Arrays.<Object>asList("hi there");
