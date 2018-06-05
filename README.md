@@ -53,6 +53,19 @@
 49. [Java: What is the ThreadLocal class? How and why would you use it?](#49-what-is-the-threadlocal-class-how-and-why-would-you-use-it)
 50. [Java: What is the volatile keyword? How and why would you use it?](#50-what-is-the-volatile-keyword-how-and-why-would-you-use-it)
 51. [Java: What is stale state?](#51-what-is-stale-state)
+52. [Java: Compare the sleep() and wait() methods in Java, including when and why you would use one vs. the other.]()
+53. [Java: Tail recursion is functionally equivalent to iteration. Since Java does not yet support tail call optimization, describe how to transform a simple tail recursive function into a loop and why one is typically preferred over the other.]()
+54. [Java: How can you catch an exception thrown by another thread in Java?]()
+55. [Java: When designing an abstract class, why should you avoid calling abstract methods inside its constructor?]()
+56. [Java: What variance is imposed on generic type parameters? How much control does Java give you over this?]()
+57. [Java: If one needs a Set, how do you choose between HashSet vs. TreeSet?]()
+58. [Java: What are method references, and how are they useful?]()
+59. [Java: How are Java enums more powerful than integer constants? How can this capability be used?]()
+60. [Java: What is reflection? Give an example of functionality that can only be implemented using reflection.]()
+61. [Java: What are static initializers and when would you use them?]()
+62. [Java: Nested classes can be static or non-static (also called an inner class). How do you decide which to use? Does it matter? When exactly is it leak safe to use (anonymous) inner classes?]()
+63. [Java: What is the difference between String s = "Test" and String s = new String("Test")? Which is better and why?]()
+
 
 ## JavaScript
 1. [JavaScript: What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
@@ -69,6 +82,10 @@
 
 ## Algorithms
 1. [Algorithms: Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.](#1-write-a-simple-function-less-than-160-characters-that-returns-a-boolean-indicating-whether-or-not-a-string-is-a-palindrome)
+
+## Tricky
+
+[How can you swap the values of two numeric variables without using any other variables?]()
 
 # Java Part
 
@@ -1309,6 +1326,536 @@ Dangerously stale state is stale state that might adversely affect the operation
 
 In computer processing, if a processor changes the value of an operand and then, at a subsequent time, fetches the operand and obtains the old rather than the new value of the operand, then it is said to have seen stale data.
 
+## 52. Compare the sleep() and wait() methods in Java, including when and why you would use one vs. the other.
+
+* `sleep()` is a blocking operation that keeps a hold on the monitor / lock of the shared object for the specified number of milliseconds.
+
+* `wait()`, on the other hand, simply pauses the thread until either (a) the specified number of milliseconds have elapsed or (b) it receives a desired notification from another thread (whichever is first), without keeping a hold on the monitor/lock of the shared object.
+
+`sleep()` is most commonly used for polling, or to check for certain results, at a regular interval. wait() is generally used in multithreaded applications, in conjunction with notify() / notifyAll(), to achieve synchronization and avoid race conditions.
+
+## 53. Tail recursion is functionally equivalent to iteration. Since Java does not yet support tail call optimization, describe how to transform a simple tail recursive function into a loop and why one is typically preferred over the other.
+
+Here is an example of a typical recursive function, computing the arithmetic series 1, 2, 3…N. Notice how the addition is performed after the function call. For each recursive step, we add another frame to the stack.
+
+```java
+public int sumFromOneToN(int n) {
+  if (n < 1) {
+    return 0;
+  }
+
+  return n + sumFromOneToN(n - 1);
+}
+```
+
+Tail recursion occurs when the recursive call is in the tail position within its enclosing context - after the function calls itself, it performs no additional work. That is, once the base case is complete, the solution is apparent. For example:
+
+```java
+public int sumFromOneToN(int n, int a) {
+  if (n < 1) {
+    return a;
+  }
+
+  return sumFromOneToN(n - 1, a + n);
+}
+```
+
+Here you can see that a plays the role of the accumulator - instead of computing the sum on the way down the stack, we compute it on the way up, effectively making the return trip unnecessary, since it stores no additional state and performs no further computation. Once we hit the base case, the work is done - below is that same function, “unrolled”.
+
+```java
+public int sumFromOneToN(int n) {
+  int a = 0;
+
+  while(n > 0) {
+    a += n--;
+  }
+  
+  return a;
+}
+```
+
+Many functional languages natively support tail call optimization, however the JVM does not. In order to implement recursive functions in Java, we need to be aware of this limitation to avoid StackOverflowErrors. In Java, iteration is almost universally preferred to recursion.
+
+## 54. How can you catch an exception thrown by another thread in Java?
+
+This can be done using `Thread.UncaughtExceptionHandler`.
+
+Here’s a simple example:
+
+```java
+// create our uncaught exception handler
+Thread.UncaughtExceptionHandler handler = new Thread.UncaughtExceptionHandler() {
+    public void uncaughtException(Thread th, Throwable ex) {
+        System.out.println("Uncaught exception: " + ex);
+    }
+};
+
+// create another thread
+Thread otherThread = new Thread() {
+    public void run() {
+        System.out.println("Sleeping ...");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println("Interrupted.");
+        }
+        System.out.println("Throwing exception ...");
+        throw new RuntimeException();
+    }
+};
+
+// set our uncaught exception handler as the one to be used when the new thread
+// throws an uncaught exception
+otherThread.setUncaughtExceptionHandler(handler);
+
+// start the other thread - our uncaught exception handler will be invoked when
+// the other thread throws an uncaught exception
+otherThread.start();
+```
+
+## 55. When designing an abstract class, why should you avoid calling abstract methods inside its constructor?
+
+Hide answer
+answer badge
+This is a problem of initialization order. The subclass constructor will not have had a chance to run yet and there is no way to force it to run it before the parent class. Consider the following example class:
+
+```java
+public abstract class Widget {
+        private final int cachedWidth;
+        private final int cachedHeight;
+	
+        public Widget() {
+            this.cachedWidth = width();
+            this.cachedHeight = height();
+        }
+	
+        protected abstract int width();
+        protected abstract int height();
+}
+```
+
+This seems like a good start for an abstract Widget: it allows subclasses to fill in width and height, and caches their initial values. However, look when you spec out a typical subclass implementation like so:
+
+```java
+public class SquareWidget extends Widget {
+        private final int size;
+	
+        public SquareWidget(int size) {
+            this.size = size;
+        }
+	
+        @Override
+        protected int width() {
+            return size;
+        }
+	
+        @Override
+        protected int height() {
+            return size;
+        }
+}
+```
+
+Now we’ve introduced a subtle bug: `Widget.cachedWidth` and `Widget.cachedHeight` will always be zero for SquareWidget instances! This is because the `this.size = size` assignment occurs after the Widget constructor runs.
+
+Avoid calling abstract methods in your abstract classes’ constructors, as it restricts how those abstract methods can be implemented.
+
+## 56. What variance is imposed on generic type parameters? How much control does Java give you over this?
+
+Java’s generic type parameters are invariant. This means for any distinct types A and B, G<A> is not a subtype or supertype of G<B>. As a real world example, `List<String>` is not a supertype or subtype of `List<Object>`. So even though String extends (i.e. is a subtype of) Object, both of the following assignments will fail to compile:
+
+```java
+List<String> strings = Arrays.<Object>asList("hi there");
+List<Object> objects = Arrays.<String>asList("hi there");
+```
+
+Java does give you some control over this in the form of use-site variance. On individual methods, we can use `? extends Type` to create a covariant parameter. Here’s an example:
+
+```java
+public double sum(List<? extends Number> numbers) {
+    double sum = 0;
+    for (Number number : numbers) {
+        sum += number.doubleValue();
+    }
+    return sum;
+}
+
+List<Long> longs = Arrays.asList(42L, 128L, -10L);
+double sumOfLongs = sum(longs);
+```
+
+Even though longs is a List<Long> and not List<Number>, it can be passed to sum.
+
+Similarly, ? super Type lets a method parameter be contravariant. Consider a function with a callback parameter:
+
+```java
+public void forEachNumber(Callback<? super Number> callback) {
+    callback.call(50.0f);
+    callback.call(123123);
+    callback.call((short) 99);
+}
+```
+forEachNumber  allows `Callback<Object>` to be a subtype of `Callback <Number>`, which means any callback that handles a supertype of `Number` will do:
+
+```java
+forEachNumber(new Callback<Object>() {
+    @Override public void call(Object value) {
+        System.out.println(value);
+    }
+});
+```
+
+Note, however, that attempting to provide a callback that handles only Long (a subtype of Number) will rightly fail:
+
+```java
+// fails to compile!
+forEachNumber(new Callback<Long>() { ... });
+```
+
+Liberal application of use-site variance can prevent many of the unsafe casts that often appear in Java code and is crucial when designing interfaces used by multiple developers.
+
+## 57. If one needs a Set, how do you choose between HashSet vs. TreeSet?
+
+At first glance, HashSet is superior in almost every way: O(1) add, remove and contains, vs. O(log(N)) for TreeSet.
+
+However, TreeSet is indispensable when you wish to maintain order over the inserted elements or query for a range of elements within the set. 
+
+Consider a Set of timestamped Event objects. They could be stored in a HashSet, with equals and hashCode based on that timestamp. This is efficient storage and permits looking up events by a specific timestamp, but how would you get all events that happened on any given day? That would require a O(n) traversal of the HashSet, but it’s only a O(log(n)) operation with TreeSet using the tailSet method:
+
+```java
+public class Event implements Comparable<Event> {
+    private final long timestamp;
+    
+    public Event(long timestamp) {
+        this.timestamp = timestamp;
+    }
+    
+    @Override public int compareTo(Event that) {
+        return Long.compare(this.timestamp, that.timestamp);
+    }
+}
+       
+...
+	
+SortedSet<Event> events = new TreeSet<>();
+events.addAll(...); // events come in
+
+// all events that happened today
+long midnightToday = ...;
+events.tailSet(new Event(midnightToday));
+```
+
+If Event happens to be a class that we cannot extend or that doesn’t implement Comparable, TreeSet allows us to pass in our own Comparator:
+
+```java
+SortedSet<Event> events = new TreeSet<>(
+     (left, right) -> Long.compare(left.timestamp, right.timestamp));
+```
+
+Generally speaking, TreeSet is a good choice when order matters and when reads are balanced against the increased cost of writes.
+
+## 58. What are method references, and how are they useful?
+
+Method references were introduced in Java 8 and allow constructors and methods (static or otherwise) to be used as lambdas. They allow one to discard the boilerplate of a lambda when the method reference matches an expected signature.
+
+For example, suppose we have a service that must be stopped by a shutdown hook. Before Java 8, we would have code like this:
+
+```java
+final SomeBusyService service = new SomeBusyService();
+service.start();
+
+onShutdown(new Runnable() {
+    @Override
+    public void run() {
+        service.stop();
+    }
+});
+```
+
+With lambdas, this can be cut down considerably:
+
+```java
+onShutdown(() -> service.stop());
+```
+
+However, stop matches the signature of `Runnable.run` (void return type, no parameters), and so we can introduce a method reference to the stop method of that specific SomeBusyService instance:
+
+```java
+onShutdown(service::stop);
+```
+
+This is terse (as opposed to verbose code) and clearly communicates what is going on.
+
+Method references don’t need to be tied to a specific instance, either; one can also use a method reference to an arbitrary object, which is useful in Stream operations. For example, suppose we have a Person class and want just the lowercase names of a collection of people:
+
+```java
+List<Person> people = ...
+
+List<String> names = people.stream()
+        .map(Person::getName)
+        .map(String::toLowerCase)
+        .collect(toList());
+```
+
+A complex lambda can also be pushed into a static or instance method and then used via a method reference instead. This makes the code more reusable and testable than if it were “trapped” in the lambda.
+
+So we can see that method references are mainly used to improve code organization, clarity and terseness.
+
+## 59. How are Java enums more powerful than integer constants? How can this capability be used?
+
+
+Enums are essentially final classes with a fixed number of instances. They can implement interfaces but cannot extend another class.
+
+This flexibility is useful in implementing the strategy pattern, for example, when the number of strategies is fixed. Consider an address book that records multiple methods of contact. We can represent these methods as an enum and attach fields, like the filename of the icon to display in the UI, and any corresponding behaviour, like how to initiate contact via that method:
+
+```java
+public enum ContactMethod {
+    PHONE("telephone.png") {
+        @Override public void initiate(User user) {
+            Telephone.dial(user.getPhoneNumber());
+        }
+    },
+    EMAIL("envelope.png") {
+        @Override public void initiate(User user) {
+            EmailClient.sendTo(user.getEmailAddress());
+        }
+    },
+    SKYPE("skype.png") {
+        ...
+    };
+    
+    ContactMethod(String icon) {
+        this.icon = icon;
+    }
+    
+    private final String icon;
+    
+    public abstract void initiate(User user);
+    
+    public String getIcon() {
+        return icon;
+    }
+}
+```
+
+We can dispense with switch statements entirely by simply using instances of `ContactMethod`:
+
+```java
+ContactMethod method = user.getPrimaryContactMethod();
+displayIcon(method.getIcon());
+method.initiate(user);
+```
+
+This is just the beginning of what can be done with enums. Generally, the safety and flexibility of enums means they should be used in place of integer constants, and switch statements can be eliminated with liberal use of abstract methods.
+
+## 60. What is reflection? Give an example of functionality that can only be implemented using reflection.
+
+Reflection allows programmatic access to information about a Java program’s types. Commonly used information includes: methods and fields available on a class, interfaces implemented by a class, and the runtime-retained annotations on classes, fields and methods.
+
+Examples given are likely to include:
+
+* Annotation-based serialization libraries often map class fields to JSON keys or XML elements (using annotations). These libraries need reflection to inspect those fields and their annotations and also to access the values during serialization.
+* Model-View-Controller frameworks call controller methods based on routing rules. These frameworks must use reflection to find a method corresponding to an action name, check that its signature conforms to what the framework expects (e.g. takes a Request object, returns a Response), and finally, invoke the method.
+* Dependency injection frameworks lean heavily on reflection. They use it to instantiate arbitrary beans for injection, check fields for annotations such as @Inject to discover if they require injection of a bean, and also to set those values.
+* Object-relational mappers such as Hibernate use reflection to map database columns to fields or getter/setter pairs of a class, and can go as far as to infer table and column names by reading class and getter names, respectively.
+
+A concrete code example could be something simple, like copying an object’s fields into a map:
+
+```java
+Person person = new Person("Doug", "Sparling", 31);
+
+Map<String, Object> values = new HashMap<>();
+for (Field field : person.getClass().getDeclaredFields()) {
+    values.put(field.getName(), field.get(person));
+}
+
+// prints {firstName=Doug, lastName=Sparling, age=31}
+System.out.println(values);
+```
+
+Such tricks can be useful for debugging, or for utility methods such as a toString method that works on any class.
+
+Aside from implementing generic libraries, direct use of reflection is rare but it is still a handy tool to have. Knowledge of reflection is also useful for when these mechanisms fail.
+
+However, it is often prudent to avoid reflection unless it is strictly necessary, as it can turn straightforward compiler errors into runtime errors.
+
+## 61. What are static initializers and when would you use them?
+
+A static initializer gives you the opportunity to run code during the initial loading of a class and it guarantees that this code will only run once and will finish running before your class can be accessed in any way.
+
+They are useful for performing initialization of complex static objects or to register a type with a static registry, as JDBC drivers do.
+
+Suppose you want to create a static, immutable Map containing some feature flags. Java doesn’t have a good one-liner for initializing maps, so you can use static initializers instead:
+
+```java
+public static final Map<String, Boolean> FEATURE_FLAGS;
+static {
+    Map<String, Boolean> flags = new HashMap<>();
+    flags.put("frustrate-users", false);
+    flags.put("reticulate-splines", true);
+    flags.put(...);
+    FEATURE_FLAGS = Collections.unmodifiableMap(flags);
+}
+```
+
+Within the same class, you can repeat this pattern of declaring a static field and immediately initializing it, since multiple static initializers are allowed.
+
+```java
+public class Foo {
+
+ //instance variable initializer
+ String s = "abc";
+
+ //constructor
+ public Foo() {
+     System.out.println("constructor called");
+ }
+
+ //static initializer
+ static {
+     System.out.println("static initializer called");
+ }
+
+ //instance initializer
+ {
+     System.out.println("instance initializer called");
+ }
+
+ public static void main(String[] args) {
+     new Foo();
+     new Foo();
+ }
+}
+```
+Output:
+```
+static initializer called
+instance initializer called
+constructor called
+instance initializer called
+constructor called
+```
+
+## 62. Nested classes can be static or non-static (also called an inner class). How do you decide which to use? Does it matter? When exactly is it leak safe to use (anonymous) inner classes?
+
+The key difference between is that inner classes have full access to the fields and methods of the enclosing class. This can be convenient for event handlers, but comes at a cost: every instance of an inner class retains and requires a reference to its enclosing class.
+
+With this cost in mind, there are many situations where we should prefer static nested classes. When instances of the nested class will outlive instances of the enclosing class, the nested class should be static to prevent memory leaks. Consider this implementation of the factory pattern:
+
+```java
+public interface WidgetParser {
+    Widget parse(String str);
+}
+
+public class WidgetParserFactory {
+    public WidgetParserFactory(ParseConfig config) {
+        ...
+    }
+
+    public WidgetParser create() {
+        new WidgetParserImpl(...);
+    }
+
+    private class WidgetParserImpl implements WidgetParser {
+        ...
+        
+        @Override public Widget parse(String str) {
+            ...
+        }
+    }
+}
+```
+
+At a glance, this design looks good: the WidgetParserFactory hides the implementation details of the parser with the nested class WidgetParserImpl. However, WidgetParserImpl is not static, and so if WidgetParserFactory is discarded immediately after the WidgetParser is created, the factory will leak, along with all the references it holds.
+
+WidgetParserImpl should be made static, and if it needs access to any of WidgetParserFactory’s internals, they should be passed into WidgetParserImpl’s constructor instead. This also makes it easier to extract WidgetParserImpl into a separate class should it outgrow its enclosing class.
+
+Inner classes are also harder to construct via reflection due to their “hidden” reference to the enclosing class, and this reference can get sucked in during reflection-based serialization, which is probably not intended.
+
+So we can see that the decision of whether to make a nested class static is important, and that one should aim to make nested classes static in cases where instances will “escape” the enclosing class or if reflection on those nested classes is involved.
+
+* Static inner classes:
+	* Are considered "top-level".
+	* Do not require an instance of the containing class to be constructed.
+	* May not reference the containing class members without an explicit reference.
+	* Have their own lifetime.
+* Non-Static inner classes:
+	* Always require an instance of the containing class to be constructed.
+	* Automatically have an implicit reference to the containing instance.
+	* May access the container's class members without the reference.
+	* Lifetime is supposed to be no longer than that of the container.
+
+__Garbage Collection and Non-Static Inner Classes__
+
+Garbage Collection is automatic but tries to remove objects based on whether it thinks they are being used. The Garbage Collector is pretty smart, but not flawless. It can only determine if something is being used by whether or not there is an active reference to the object.
+
+The real issue here is when a Non-Static Inner Class has been kept alive longer than its container. This is because of the implicit reference to the containing class. The only way this can occur is if an object outside of the containing class keeps a reference to the inner object, without regard to the containing object.
+
+This can lead to a situation where the inner object is alive (via reference) but the references to the containing object has already been removed from all other objects. The inner object is, therefore, keeping the containing object alive because it will always have a reference to it. The problem with this is that unless it is programmed, there is no way to get back to the containing object to check if it is even alive.
+
+There are two differences between static inner and non static inner classes.
+
+* In case of declaring member fields and methods, non static inner class cannot have static fields and methods. But, in case of static inner class, can have static and non static fields and method.
+
+* The instance of non static inner class is created with the reference of object of outer class, in which it has defined, this means it has enclosing instance. But the instance of static inner class is created without the reference of Outer class, which means it does not have enclosing instance.
+
+See this example:
+
+```java
+class A
+{
+    class B
+    {
+        // static int x; not allowed here
+    }
+
+    static class C
+    {
+        static int x; // allowed here
+    }
+}
+
+class Test
+{
+    public static void main(String… str)
+    {
+        A a = new A();
+
+        // Non-Static Inner Class
+        // Requires enclosing instance
+        A.B obj1 = a.new B(); 
+
+        // Static Inner Class
+        // No need for reference of object to the outer class
+        A.C obj2 = new A.C(); 
+    }
+}
+```
+
+## 63. What is the difference between String s = "Test" and String s = new String("Test")? Which is better and why?
+
+Hide answer
+answer badge
+In general, String s = "Test" is more efficient to use than String s = new String("Test").
+
+In the case of String s = "Test", a String with the value “Test” will be created in the String pool. If another String with the same value is then created (e.g., String s2 = "Test"), it will reference this same object in the String pool.
+
+However, if you use String s = new String("Test"), in addition to creating a String with the value “Test” in the String pool, that String object will then be passed to the constructor of the String Object (i.e., new String("Test")) and will create another String object (not in the String pool) with that value. Each such call will therefore create an additional String object (e.g., String s2 = new String("Test") would create an addition String object, rather than just reusing the same String object from the String pool).
+
+##########################################################################################################################################################################################################################################################
+
+##########################################################################################################################################################################################################################################################
+
+
+##########################################################################################################################################################################################################################################################
+
+##########################################################################################################################################################################################################################################################
+
+
+##########################################################################################################################################################################################################################################################
+
+##########################################################################################################################################################################################################################################################
+
 
 # JavaScript Part
 
@@ -1644,6 +2191,11 @@ for (let i = 0; i < 5; i++) {
 }
 ```
 
+##########################################################################################################################################################################################################################################################
+
+##########################################################################################################################################################################################################################################################
+
+
 # Algorithms Part
 
 ## 1. Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.
@@ -1661,4 +2213,13 @@ For example:
 console.log(isPalindrome("level"));                   // logs 'true'
 console.log(isPalindrome("levels"));                  // logs 'false'
 console.log(isPalindrome("A car, a man, a maraca"));  // logs 'true'
+```
+# Tricky Questions
+
+## How can you swap the values of two numeric variables without using any other variables? 
+
+```
+a = a + b;
+b = a - b;
+a = a - b;
 ```
