@@ -49,6 +49,9 @@
 45. [Java: What is multi-threading?](#45-what-is-multi-threading)
 46. [Java: Describe and compare fail-fast and fail-safe iterators. Give examples.]()
 47. [Java: ArrayList, LinkedList, and Vector are all implementations of the List interface. Which of them is most efficient for adding and removing elements from the list? Explain your answer, including any other alternatives you may be aware of.]()
+48. [Java: Why would it be more secure to store sensitive data (such as a password, social security number, etc.) in a character array rather than in a String?]()
+49. [Java: What is the ThreadLocal class? How and why would you use it?]()
+50. [Java: ]
 
 ## JavaScript
 1. [JavaScript: What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
@@ -1234,6 +1237,40 @@ Of the three, LinkedList is generally going to give you the best performance. He
 * LinkedList, on the other hand, is implemented using a doubly linked list. As a result, an inserting or removing an element only requires updating the links that immediately precede and follow the element being inserted or removed.
 
 However, it is worth noting that if performance is that critical, it’s better to just use an array and manage it yourself, or use one of the high performance 3rd party packages such as Trove or HPPC.
+
+## 48. Why would it be more secure to store sensitive data (such as a password, social security number, etc.) in a character array rather than in a String?
+
+In Java, Strings are immutable and are stored in the String pool. What this means is that, once a String is created, it stays in the pool in memory until being garbage collected. Therefore, even after you’re done processing the string value (e.g., the password), it remains available in memory for an indeterminate period of time thereafter (again, until being garbage collected) which you have no real control over. Therefore, anyone having access to a memory dump can potentially extract the sensitive data and exploit it.
+
+In contrast, if you use a mutable object like a character array, for example, to store the value, you can set it to blank once you are done with it with confidence that it will no longer be retained in memory.
+
+## 49. What is the ThreadLocal class? How and why would you use it?
+
+A single ThreadLocal instance can store different values for each thread independently. Each thread that accesses the get() or set() method of a ThreadLocal instance is accessing its own, independently initialized copy of the variable. ThreadLocal instances are typically private static fields in classes that wish to associate state with a thread (e.g., a user ID or transaction ID). The example below, from the ThreadLocal Javadoc, generates unique identifiers local to each thread. A thread’s id is assigned the first time it invokes ThreadId.get() and remains unchanged on subsequent calls.
+
+```java
+public class ThreadId {
+    // Next thread ID to be assigned
+    private static final AtomicInteger nextId = new AtomicInteger(0);
+
+    // Thread local variable containing each thread's ID
+    private static final ThreadLocal<Integer> threadId =
+        new ThreadLocal<Integer>() {
+            @Override protected Integer initialValue() {
+                return nextId.getAndIncrement();
+        }
+    };
+
+    // Returns the current thread's unique ID, assigning it if necessary
+    public static int get() {
+        return threadId.get();
+    }
+}
+```
+
+Each thread holds an implicit reference to its copy of a thread-local variable as long as the thread is alive and the ThreadLocal instance is accessible; after a thread goes away, all of its copies of thread-local instances are subject to garbage collection (unless other references to these copies exist).
+
+
 
 # JavaScript Part
 
