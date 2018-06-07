@@ -79,6 +79,10 @@
 9. [JavaScript: Discuss possible ways to write a function isInteger(x) that determines if x is an integer.](#9-discuss-possible-ways-to-write-a-function-isintegerx-that-determines-if-x-is-an-integer)
 10. [JavaScript: In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?](#10-in-what-order-will-the-numbers-1-4-be-logged-to-the-console-when-the-code-below-is-executed-why)
 11. [JavaScript: Consider the following code snippet](#11-consider-the-following-code-snippet)
+12. [JavaScript: What will the code below output to the console and why?]()
+13. [JavaScript: The following recursive code will cause a stack overflow if the array list is too large. How can you fix this and still retain the recursive pattern?]()
+14. [JavaScript: What is a “closure” in JavaScript? Provide an example.]()
+15. [JavaScript: What would the following lines of code output to the console?]()
 
 ## Algorithms
 1. [Algorithms: Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.](#1-write-a-simple-function-less-than-160-characters-that-returns-a-boolean-indicating-whether-or-not-a-string-is-a-palindrome)
@@ -2174,6 +2178,175 @@ for (let i = 0; i < 5; i++) {
   btn.addEventListener('click', function(){ console.log(i); });
   document.body.appendChild(btn);
 }
+```
+
+## 12. What will the code below output to the console and why?
+
+```javascript
+console.log(1 +  "2" + "2");
+console.log(1 +  +"2" + "2");
+console.log(1 +  -"1" + "2");
+console.log(+"1" +  "1" + "2");
+console.log( "A" - "B" + "2");
+console.log( "A" - "B" + 2);
+```
+
+The above code will output the following to the console:
+
+```javascript
+"122"
+"32"
+"02"
+"112"
+"NaN2"
+NaN
+```
+
+The fundamental issue here is that JavaScript (ECMAScript) is a loosely typed language and it performs automatic type conversion on values to accommodate the operation being performed. Let’s see how this plays out with each of the above examples.
+
+* Example 1: 
+
+1 + "2" + "2" Outputs: "122" Explanation: The first operation to be performed in 1 + "2". Since one of the operands ("2") is a string, JavaScript assumes it needs to perform string concatenation and therefore converts the type of 1 to "1", 1 + "2" yields "12". Then, "12" + "2" yields "122".
+
+* Example 2:
+
+1 + +"2" + "2" Outputs: "32" Explanation: Based on order of operations, the first operation to be performed is +"2" (the extra + before the first "2" is treated as a unary operator). Thus, JavaScript converts the type of "2" to numeric and then applies the unary + sign to it (i.e., treats it as a positive number). As a result, the next operation is now 1 + 2 which of course yields 3. But then, we have an operation between a number and a string (i.e., 3 and "2"), so once again JavaScript converts the type of the numeric value to a string and performs string concatenation, yielding "32".
+
+* Example 3: 
+
+1 + -"1" + "2" Outputs: "02" Explanation: The explanation here is identical to the prior example, except the unary operator is - rather than +. So "1" becomes 1, which then becomes -1 when the - is applied, which is then added to 1 yielding 0, which is then converted to a string and concatenated with the final "2" operand, yielding "02".
+
+* Example 4: 
+
++"1" + "1" + "2" Outputs: "112" Explanation: Although the first "1" operand is typecast to a numeric value based on the unary + operator that precedes it, it is then immediately converted back to a string when it is concatenated with the second "1" operand, which is then concatenated with the final "2" operand, yielding the string "112".
+
+* Example 5: 
+
+"A" - "B" + "2" Outputs: "NaN2" Explanation: Since the - operator can not be applied to strings, and since neither "A" nor "B" can be converted to numeric values, "A" - "B" yields NaN which is then concatenated with the string "2" to yield “NaN2”.
+
+* Example 6: 
+
+"A" - "B" + 2 Outputs: NaN Explanation: As exlained in the previous example, "A" - "B" yields NaN. But any operator applied to NaN with any other numeric operand will still yield NaN.
+
+## 13. The following recursive code will cause a stack overflow if the array list is too large. How can you fix this and still retain the recursive pattern?
+
+```javascript
+var list = readHugeList();
+
+var nextListItem = function() {
+    var item = list.pop();
+
+    if (item) {
+        // process the list item...
+        nextListItem();
+    }
+};
+```
+
+The potential stack overflow can be avoided by modifying the nextListItem function as follows:
+
+```javascript
+var list = readHugeList();
+
+var nextListItem = function() {
+    var item = list.pop();
+
+    if (item) {
+        // process the list item...
+        setTimeout( nextListItem, 0);
+    }
+};
+```
+
+The stack overflow is eliminated because the event loop handles the recursion, not the call stack. When nextListItem runs, if item is not null, the timeout function (nextListItem) is pushed to the event queue and the function exits, thereby leaving the call stack clear. When the event queue runs its timed-out event, the next item is processed and a timer is set to again invoke nextListItem. Accordingly, the method is processed from start to finish without a direct recursive call, so the call stack remains clear, regardless of the number of iterations.
+
+
+## 14. What is a “closure” in JavaScript? Provide an example.
+
+A closure is an inner function that has access to the variables in the outer (enclosing) function’s scope chain. The closure has access to variables in three scopes; specifically: (1) variable in its own scope, (2) variables in the enclosing function’s scope, and (3) global variables.
+
+Here is an example:
+
+```javascript
+var globalVar = "xyz";
+
+(function outerFunc(outerArg) {
+    var outerVar = 'a';
+    
+    (function innerFunc(innerArg) {
+    var innerVar = 'b';
+    
+    console.log(
+        "outerArg = " + outerArg + "\n" +
+        "innerArg = " + innerArg + "\n" +
+        "outerVar = " + outerVar + "\n" +
+        "innerVar = " + innerVar + "\n" +
+        "globalVar = " + globalVar);
+    
+    })(456);
+})(123);
+```
+In the above example, variables from innerFunc, outerFunc, and the global namespace are all in scope in the innerFunc. The above code will therefore produce the following output:
+
+```javascript
+outerArg = 123
+innerArg = 456
+outerVar = a
+innerVar = b
+globalVar = xyz
+```
+
+```javascript
+const outer = () => {
+	let message = "Hello";
+    return (name) => console.log(`${message}, ${name}`)
+}
+
+const inner = outer()
+inner("George") // Hello, George
+```
+
+## 15. What would the following lines of code output to the console?
+
+```javascript
+console.log("0 || 1 = "+(0 || 1));
+console.log("1 || 2 = "+(1 || 2));
+console.log("0 && 1 = "+(0 && 1));
+console.log("1 && 2 = "+(1 && 2));
+```
+The code will output the following four lines:
+
+```javascript
+0 || 1 = 1
+1 || 2 = 1
+0 && 1 = 0
+1 && 2 = 2
+```
+
+In JavaScript, both `||` and `&&` are logical operators that return the first fully-determined “logical value” when evaluated from left to right.
+
+The or (`||`) operator. In an expression of the form `X||Y`, `X` is first evaluated and interpreted as a boolean value. If this boolean value is true, then true (1) is returned and `Y` is not evaluated, since the “or” condition has already been satisfied. If this boolean value is “false”, though, we still don’t know if `X||Y` is true or false until we evaluate Y, and interpret it as a boolean value as well.
+
+Accordingly, `0 || 1` evaluates to true (1), as does `1 || 2`.
+
+The and (`&&`) operator. In an expression of the form `X&&Y`, `X` is first evaluated and interpreted as a boolean value. If this boolean value is false, then false (0) is returned and `Y` is not evaluated, since the “and” condition has already failed. If this boolean value is “true”, though, we still don’t know if `X&&Y` is true or false until we evaluate Y, and interpret it as a boolean value as well.
+
+However, the interesting thing with the `&&` operator is that when an expression is evaluated as “true”, then the expression itself is returned. This is fine, since it counts as “true” in logical expressions, but also can be used to return that value when you care to do so. This explains why, somewhat surprisingly, `1 && 2` returns 2 (whereas you might it expect it to return true or 1).
+
+`&&` returns first value converting to false or last value converting to true. It's because no need to calculate full logical condition with && if first value is falsy
+
+```javascript
+console.log(55 && 66); // 66
+console.log(0 && 77); // 0
+console.log(88 && 0); // 0
+```
+
+Also you can use `&&` or `||` as if operator:
+
+```javascript
+if (itsSunny) takeSunglasses();
+//equals to
+itsSunny && takeSunglasses();
 ```
 
 ##########################################################################################################################################################################################################################################################
