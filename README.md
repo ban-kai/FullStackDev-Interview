@@ -79,10 +79,11 @@
 9. [JavaScript: Discuss possible ways to write a function isInteger(x) that determines if x is an integer.](#9-discuss-possible-ways-to-write-a-function-isintegerx-that-determines-if-x-is-an-integer)
 10. [JavaScript: In what order will the numbers 1-4 be logged to the console when the code below is executed? Why?](#10-in-what-order-will-the-numbers-1-4-be-logged-to-the-console-when-the-code-below-is-executed-why)
 11. [JavaScript: Consider the following code snippet](#11-consider-the-following-code-snippet)
-12. [JavaScript: What will the code below output to the console and why?]()
-13. [JavaScript: The following recursive code will cause a stack overflow if the array list is too large. How can you fix this and still retain the recursive pattern?]()
-14. [JavaScript: What is a “closure” in JavaScript? Provide an example.]()
-15. [JavaScript: What would the following lines of code output to the console?]()
+12. [JavaScript: What will the code below output to the console and why?](#12-what-will-the-code-below-output-to-the-console-and-why)
+13. [JavaScript: The following recursive code will cause a stack overflow if the array list is too large. How can you fix this and still retain the recursive pattern?](#13-the-following-recursive-code-will-cause-a-stack-overflow-if-the-array-list-is-too-large-how-can-you-fix-this-and-still-retain-the-recursive-pattern)
+14. [JavaScript: What is a “closure” in JavaScript? Provide an example.](#14-what-is-a-closure-in-javascript-provide-an-example)
+15. [JavaScript: What would the following lines of code output to the console?](#15-what-would-the-following-lines-of-code-output-to-the-console)
+16. [JavaScript: What will be the output when the following code is executed?]()
 
 ## Algorithms
 1. [Algorithms: Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.](#1-write-a-simple-function-less-than-160-characters-that-returns-a-boolean-indicating-whether-or-not-a-string-is-a-palindrome)
@@ -2347,6 +2348,212 @@ Also you can use `&&` or `||` as if operator:
 if (itsSunny) takeSunglasses();
 //equals to
 itsSunny && takeSunglasses();
+```
+
+## 16. What will be the output when the following code is executed? Explain the difference between `==` and `===`.
+
+```javascript
+console.log(false == '0')
+console.log(false === '0')
+```
+```
+true
+false
+```
+
+In JavaScript, there are two sets of equality operators. The triple-equal operator === behaves like any traditional equality operator would: evaluates to true if the two expressions on either of its sides have the same type and the same value. The double-equal operator, however, tries to coerce the values before comparing them. It is therefore generally good practice to use the === rather than ==. The same holds true for !== vs !=.
+
+When comparing values, there is a difference between the `==` operator and the `===` operator. The `==` equality operator happily converts between types to find a match, so 1 == true evaluates to true because true is converted to 1. The  `===` type equality operator doesn't do type conversions, so 1 === true evaluates to false because the values are of different types.
+
+## 17. What is the output out of the following code? Can an object be a key for another object? Explain your answer. 
+
+```javascript
+var a={},
+    b={key:'b'},
+    c={key:'c'};
+
+a[b]=123;
+a[c]=456;
+
+console.log(a[b]);
+```
+
+The output of this code will be `456` (not `123`).
+
+The reason for this is as follows: When setting an object property, JavaScript will implicitly stringify the parameter value. In this case, since b and c are both objects, they will both be converted to `"[object Object]"`. As a result, `a[b]` and `a[c]` are both equivalent to `a["[object Object]"]` and can be used interchangeably. Therefore, setting or referencing a[c] is precisely the same as setting or referencing `a[b]`.
+
+## 18. What will the following code output to the console and why:
+
+```javascript
+var hero = {
+    _name: 'John Doe',
+    getSecretIdentity: function (){
+        return this._name;
+    }
+};
+
+var stoleSecretIdentity = hero.getSecretIdentity;
+
+console.log(stoleSecretIdentity());
+console.log(hero.getSecretIdentity());
+```
+
+The code will output:
+
+```
+undefined
+John Doe
+```
+
+The first console.log prints undefined because we are extracting the method from the hero object, so `stoleSecretIdentity()` is being invoked in the global context (i.e., the window object) where the `_name` property does not exist.
+
+One way to fix the `stoleSecretIdentity()` function is as follows:
+
+`var stoleSecretIdentity = hero.getSecretIdentity.bind(hero);`
+
+## 19. Visiting all elements in a tree (DOM).
+
+Visiting all elements in a tree is a classic __Depth-First-Search__ algorithm application. Here’s an example solution:
+
+```javascript
+function Traverse(p_element,p_callback) {
+   p_callback(p_element);
+   var list = p_element.children;
+   for (var i = 0; i < list.length; i++) {
+       Traverse(list[i],p_callback);  // recursive call
+   }
+}
+```
+
+## 20. Testing your this knowledge in JavaScript: What is the output of the following code?
+
+```javascript
+var length = 10;
+function fn() {
+	console.log(this.length);
+}
+
+var obj = {
+  length: 5,
+  method: function(fn) {
+    fn();
+    arguments[0]();
+  }
+};
+
+obj.method(fn, 1);
+```
+
+Output:
+
+```
+10
+2
+```
+Why isn’t it 10 and 5?
+
+In the first place, as fn is passed as a parameter to the function method, the scope (`this`) of the function fn is window. `var length = 10;` is declared at the window level. It also can be accessed as `window.length` or `length` or `this.length` (when `this === window.`)
+
+`method` is bound to `Object obj`, and `obj.method` is called with parameters `fn` and `1`. Though method is accepting only one parameter, while invoking it has passed two parameters; the first is a function callback and other is just a number.
+
+When `fn()` is called inside method, which was passed the function as a parameter at the global level, `this.length` will have access to `var length = 10` (declared globally) not `length = 5` as defined in `Object obj`.
+
+Now, we know that we can access any number of arguments in a JavaScript function using the `arguments[]` array.
+
+Hence `arguments[0]()` is nothing but calling `fn()`. Inside `fn` now, the scope of `this` function becomes the `arguments` array, and logging the length of `arguments[]` will return 2.
+
+## 21. Consider the following code. What will the output be, and why?
+
+```javascript
+(function () {
+    try {
+        throw new Error();
+    } catch (x) {
+        var x = 1, y = 2;
+        console.log(x);
+    }
+    console.log(x);
+    console.log(y);
+})();
+```
+
+```
+1
+undefined
+2
+```
+
+`var` statements are hoisted (without their value initialization) to the top of the global or function scope it belongs to, even when it’s inside a with or `catch` block. However, the error’s identifier is only visible inside the catch block. It is equivalent to:
+
+```javascript
+(function () {
+    var x, y; // outer and hoisted
+    try {
+        throw new Error();
+    } catch (x /* inner */) {
+        x = 1; // inner x, not the outer one
+        y = 2; // there is only one y, which is in the outer scope
+        console.log(x /* inner */);
+    }
+    console.log(x);
+    console.log(y);
+})();
+```
+
+## 22. What will be the output of this code?
+
+```javascript
+var x = 21;
+var girl = function () {
+    console.log(x);
+    var x = 20;
+};
+girl ();
+```
+
+Neither 21, nor 20, the result is `undefined`.
+
+It’s because JavaScript initialization is not hoisted.
+
+(Why doesn’t it show the global value of 21? The reason is that when the function is executed, it checks that there’s a local x variable present but doesn’t yet declare it, so it won’t look for global one.)
+
+## 23. How do you clone an object?
+
+```javascript
+var obj = {a: 1 ,b: 2}
+var objclone = Object.assign({},obj);
+```
+
+Now the value of objclone is `{a: 1 ,b: 2}` but points to a different object than obj.
+
+Note the potential pitfall, though: `Object.assign()` will just do a shallow copy, not a deep copy. This means that nested objects aren’t copied. They still refer to the same nested objects as the original:
+
+```javascript
+let obj = {
+    a: 1,
+    b: 2,
+    c: {
+        age: 30
+    }
+};
+
+var objclone = Object.assign({},obj);
+console.log('objclone: ', objclone);
+
+obj.c.age = 45;
+console.log('After Change - obj: ', obj);           // 45 - This also changes
+console.log('After Change - objclone: ', objclone); // 45
+```
+
+Deep cloning alternative
+
+```javascript
+// Deep Clone
+  obj1 = { a: 0 , b: { c: 0}};
+  let obj3 = JSON.parse(JSON.stringify(obj1));
+  obj1.a = 4;
+  obj1.b.c = 4;
+  console.log(JSON.stringify(obj3)); // { a: 0, b: { c: 0}}
 ```
 
 ##########################################################################################################################################################################################################################################################
