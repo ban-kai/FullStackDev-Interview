@@ -2566,6 +2566,111 @@ Deep cloning alternative
   console.log(JSON.stringify(obj3)); // { a: 0, b: { c: 0}}
 ```
 
+## 24. What do the following lines output, and why?
+
+```javascript
+console.log(1 < 2 < 3);
+console.log(3 > 2 > 1);
+```
+
+The first statement returns `true` which is as expected because `1 < 2 < 3` is translated as `true < 3` which translates to `1 < 3` which is `true`.
+
+The second returns false because of how the engine works regarding operator associativity for `<` and `>`. It compares left to right, so `3 > 2 > 1` JavaScript translates to `true > 1`. true has value 1, so it then compares `1 > 1`, which is false.
+
+## 25. How do you add an element at the begining of an array? How do you add one at the end?
+
+```javascript
+var myArray = ['a', 'b', 'c', 'd'];
+myArray.push('end');
+myArray.unshift('start');
+console.log(myArray); // ["start", "a", "b", "c", "d", "end"]
+```
+
+With ES6, one can use the spread operator:
+
+```javascript
+myArray = ['start', ...myArray];
+myArray = [...myArray, 'end'];
+```
+
+Or, in short:
+
+```javascript
+myArray = ['start', ...myArray, 'end'];
+```
+
+## 26. Holes in array. Imagine you have this code: 
+
+```javascript
+var a = [1, 2, 3];
+```
+a) Will this result in a crash?
+```javascript
+a[10] = 99;
+```
+b) What will this output?
+```javascript
+console.log(a[6]);
+```
+
+a) It will not crash. The JavaScript engine will make array slots 3 through 9 be “empty slots.”
+
+b) Here, a[6] will output undefined, but the slot still remains empty rather than filled with undefined. This may be an important nuance in some cases. For example, when using map(), empty slots will remain empty in map()’s output, but undefined slots will be remapped using the function passed to it:
+
+```javascript
+var b = [undefined];
+b[2] = 1;
+console.log(b);             // (3) [undefined, empty × 1, 1]
+console.log(b.map(e => 7)); // (3) [7,         empty × 1, 7]
+```
+
+## 27. What is the value of `typeof undefined == typeof NULL`?
+
+The expression will be evaluated to true, since NULL will be treated as any other undefined variable.
+
+Note: JavaScript is case-sensitive and here we are using NULL instead of `null`.
+
+## 28. What would following code return?
+
+```javascript
+console.log(typeof typeof 1);
+```
+
+`string`
+
+`typeof 1` will return `"number"` and `typeof "number"` will return string.
+
+## 28. What will the following code output and why?
+
+```javascript
+var b = 1;
+function outer(){
+   	var b = 2
+    function inner(){
+        b++;
+        var b = 3;
+        console.log(b)
+    }
+    inner();
+}
+outer();
+```
+
+Output to the console will be “3”.
+
+There are three closures in the example, each with it’s own var b declaration. When a variable is invoked closures will be checked in order from local to global until an instance is found. Since the inner closure has a b variable of its own, that is what will be output.
+
+Furthermore, due to hoisting the code in inner will be interpreted as follows:
+
+```javascript
+function inner () {
+    var b; // b is undefined
+    b++; // b is NaN
+    b = 3; // b is 3
+    console.log(b); // output "3"
+}
+```
+
 ##########################################################################################################################################################################################################################################################
 
 # Algorithms Part
