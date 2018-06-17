@@ -65,6 +65,7 @@
 61. [Java: What are static initializers and when would you use them?](#61-what-are-static-initializers-and-when-would-you-use-them)
 62. [Java: Nested classes can be static or non-static (also called an inner class). How do you decide which to use? Does it matter? When exactly is it leak safe to use (anonymous) inner classes?](#62-nested-classes-can-be-static-or-non-static-also-called-an-inner-class-how-do-you-decide-which-to-use-does-it-matter-when-exactly-is-it-leak-safe-to-use-anonymous-inner-classes)
 63. [Java: What is the difference between String s = "Test" and String s = new String("Test")? Which is better and why?](#63-what-is-the-difference-between-string-s--test-and-string-s--new-stringtest-which-is-better-and-why)
+64. [Java: What is classloader?]()
 
 
 ## JavaScript
@@ -1854,6 +1855,59 @@ In general, String s = "Test" is more efficient to use than String s = new Strin
 In the case of String s = "Test", a String with the value “Test” will be created in the String pool. If another String with the same value is then created (e.g., String s2 = "Test"), it will reference this same object in the String pool.
 
 However, if you use String s = new String("Test"), in addition to creating a String with the value “Test” in the String pool, that String object will then be passed to the constructor of the String Object (i.e., new String("Test")) and will create another String object (not in the String pool) with that value. Each such call will therefore create an additional String object (e.g., String s2 = new String("Test") would create an addition String object, rather than just reusing the same String object from the String pool).
+
+## 64. What is classloader?
+
+The classloader is a subsystem of JVM that is used to load classes and interfaces.There are many types of classloaders e.g. 
+Bootstrap classloader, Extension classloader, System classloader, Plugin classloader etc.
+
+## 65. Can you use this() and super() both in a constructor?
+No. Because super() or this() must be the first statement.
+
+## 66. What is the default value of the local variables?
+The local variables are not initialized to any default value, neither primitives nor object references.
+
+## 67. Does constructor return any value?
+Yes, that is current instance (You cannot use return type yet it returns a value).
+
+## 68. Can we execute a program without main() method?
+
+Yes, one of the way is static block but in previous version of JDK not in JDK 1.7.
+
+```java
+class A3{  
+  static{  
+  System.out.println("static block is invoked");  
+  System.exit(0);  
+  }  
+}  
+```
+
+In JDK7 and above, output will be:
+
+```
+Output:Error: Main method not found in class A3, please define the main method as:
+public static void main(String[] args)
+```
+
+## 69. What if the static modifier is removed from the signature of the main method?
+
+Program compiles. But at runtime throws an error "NoSuchMethodError".
+
+## 70. What is composition?
+
+Holding the reference of the other class within some other class is known as composition.
+
+## 71. What is marker interface?
+
+An interface that have no data member and method is known as a marker interface.For example Serializable, Cloneable etc.
+
+## 72. When can an object reference be cast to an interface reference?
+
+An object reference can be cast to an interface reference when the object implements the referenced interface.
+
+
+
 
 ##########################################################################################################################################################################################################################################################
 
