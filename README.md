@@ -65,8 +65,17 @@
 61. [Java: What are static initializers and when would you use them?](#61-what-are-static-initializers-and-when-would-you-use-them)
 62. [Java: Nested classes can be static or non-static (also called an inner class). How do you decide which to use? Does it matter? When exactly is it leak safe to use (anonymous) inner classes?](#62-nested-classes-can-be-static-or-non-static-also-called-an-inner-class-how-do-you-decide-which-to-use-does-it-matter-when-exactly-is-it-leak-safe-to-use-anonymous-inner-classes)
 63. [Java: What is the difference between String s = "Test" and String s = new String("Test")? Which is better and why?](#63-what-is-the-difference-between-string-s--test-and-string-s--new-stringtest-which-is-better-and-why)
-64. [Java: What is classloader?]()
-
+64. [Java: What is classloader?](#64-what-is-classloader)
+65. [Java: Can you use `this()` and `super()` both in a constructor?](#65-can-you-use-this-and-super-both-in-a-constructor)
+66. [Java: What is the default value of the local variables?](#66-what-is-the-default-value-of-the-local-variables)
+67. [Java: Does constructor return any value?](#67-does-constructor-return-any-value)
+68. [Java: Can we execute a program without main() method?](#68-can-we-execute-a-program-without-main-method)
+69. [Java: What if the static modifier is removed from the signature of the main method?](d#69-what-if-the-static-modifier-is-removed-from-the-signature-of-the-main-method)
+70. [Java: What is composition?](#70-what-is-composition)
+71. [Java: What is a marker interface?](#71-what-is-marker-interface)
+72. [Java: When can an object reference be cast to an interface reference?](#72-when-can-an-object-reference-be-cast-to-an-interface-reference)
+73. [Java: What is the difference between StringBuffer and StringBuilder?](#73-what-is-the-difference-between-stringbuffer-and-stringbuilder)
+74. [Java: What is the difference between synchronized and non-synchronized collection classes in Java?](#74-what-is-the-difference-between-synchronized-and-non-synchronized-collection-classes-in-java)
 
 ## JavaScript
 1. [JavaScript: What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
@@ -84,7 +93,20 @@
 13. [JavaScript: The following recursive code will cause a stack overflow if the array list is too large. How can you fix this and still retain the recursive pattern?](#13-the-following-recursive-code-will-cause-a-stack-overflow-if-the-array-list-is-too-large-how-can-you-fix-this-and-still-retain-the-recursive-pattern)
 14. [JavaScript: What is a “closure” in JavaScript? Provide an example.](#14-what-is-a-closure-in-javascript-provide-an-example)
 15. [JavaScript: What would the following lines of code output to the console?](#15-what-would-the-following-lines-of-code-output-to-the-console)
-16. [JavaScript: What will be the output when the following code is executed?]()
+16. [JavaScript: What will be the output when the following code is executed? Explain the difference between == and ===](#16-what-will-be-the-output-when-the-following-code-is-executed-explain-the-difference-between--and-)
+17. [JavaScript: What is the output out of the following code? Can an object be a key for another object? Explain your answer.](#17-what-is-the-output-out-of-the-following-code-can-an-object-be-a-key-for-another-object-explain-your-answer)
+18. [JavaScript: What will the following code output to the console and why](#18-what-will-the-following-code-output-to-the-console-and-why)
+19. [JavaScript: Visiting all elements in a tree (DOM).](#19-visiting-all-elements-in-a-tree-dom)
+20. [JavaScript: Testing your this knowledge in JavaScript: What is the output of the following code?](#20-testing-your-this-knowledge-in-javascript-what-is-the-output-of-the-following-code)
+21. [JavaScript: Consider the following code. What will the output be, and why?](#21-consider-the-following-code-what-will-the-output-be-and-why)
+22. [JavaScript: What will be the output of this code?](#22-what-will-be-the-output-of-this-code)
+23. [JavaScript: How do you clone an object?](#23-how-do-you-clone-an-object)
+24. [JavaScript: What do the following lines output, and why?](#24-what-do-the-following-lines-output-and-why)
+25. [JavaScript: How do you add an element at the begining of an array? How do you add one at the end?](#25-how-do-you-add-an-element-at-the-begining-of-an-array-how-do-you-add-one-at-the-end)
+26. [JavaScript: Holes in array. Imagine you have this code: ...](#26-holes-in-array-imagine-you-have-this-code)
+27. [JavaScript: What is the value of typeof undefined == typeof NULL?](#27-what-is-the-value-of-typeof-undefined--typeof-null)
+28. [JavaScript: What will the following code output and why?](#28-what-will-the-following-code-output-and-why)
+29. [JavaScript: ]
 
 ## Algorithms
 1. [Algorithms: Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.](#1-write-a-simple-function-less-than-160-characters-that-returns-a-boolean-indicating-whether-or-not-a-string-is-a-palindrome)
@@ -1875,6 +1897,8 @@ No. Because super() or this() must be the first statement.
 
 ## 66. What is the default value of the local variables?
 The local variables are not initialized to any default value, neither primitives nor object references.
+
+The local variables are not initialized to default values, as in the case of class variables. Same applies to primitives and object reference.
 
 ## 67. Does constructor return any value?
 Yes, that is current instance (You cannot use return type yet it returns a value).
