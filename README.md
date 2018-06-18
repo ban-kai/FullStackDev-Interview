@@ -1225,6 +1225,15 @@ There are two types of exceptions: checked and unchecked exceptions.
 * Checked exceptions: These exceptions must be handled by programmer otherwise the program would throw a compilation error.
 * Unchecked exceptions: It is up to the programmer to write the code in such a way to avoid unchecked exceptions. You would not get a compilation error if you do not handle these exceptions. These exceptions occur at runtime.
 
+![java](https://www3.ntu.edu.sg/home/ehchua/programming/java/images/Exception_Classes.png)
+
+* The Error class describes internal system errors (e.g., VirtualMachineError, LinkageError) that rarely occur. If such an error occurs, there is little that you can do and the program will be terminated by the Java runtime.
+* The Exception class describes the error caused by your program (e.g. FileNotFoundException, IOException). These errors could be caught and handled by your program (e.g., perform an alternate action or do a graceful exit by closing all the files, network and database connections).
+
+As illustrated, the subclasses of Error and RuntimeException are known as unchecked exceptions. These exceptions are not checked by the compiler, and hence, need not be caught or declared to be thrown in your program. This is because there is not much you can do with these exceptions. For example, a "divide by 0" triggers an ArithmeticException, array index out-of-bound triggers an ArrayIndexOutOfBoundException, which are really programming logical errors that shall be been fixed in compiled-time, rather than leaving it to runtime exception handling.
+
+All the other exception are called checked exceptions. They are checked by the compiler and must be caught or declared to be thrown.
+
 ## 44. In the below example, how many String Objects are created?
 
 ```java
@@ -1906,7 +1915,19 @@ An interface that have no data member and method is known as a marker interface.
 
 An object reference can be cast to an interface reference when the object implements the referenced interface.
 
+## 73. What is the difference between StringBuffer and StringBuilder?
 
+StringBuffer is synchronized whereas StringBuilder is not synchronized.
+
+## 74. What is the difference between synchronized and non-synchronized collection classes in Java?
+
+A synchronized collection implies that the class is thread safe. (You can have non-synchronized collections that are also thread safe, but that is a topic for about thousand theses another day.)
+The collections synchronize mutations by obtaining locks to make sure that other threads don't corrupt the state.
+Basically, use the non-synchronized versions, unless you have multiple threads.
+(And if you don't know, a thread is essentially a line of execution within a program. Some programs have multiple threads, all sharing the same code and memory.)
+
+* __Non synchronized__ - It is not-thread safe and can't be shared between many threads without proper synchronization code. 
+* __Synchronized__ - It is thread-safe and can be shared with many threads.
 
 
 ##########################################################################################################################################################################################################################################################
