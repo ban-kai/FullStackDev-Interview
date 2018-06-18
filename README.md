@@ -76,6 +76,8 @@
 72. [Java: When can an object reference be cast to an interface reference?](#72-when-can-an-object-reference-be-cast-to-an-interface-reference)
 73. [Java: What is the difference between StringBuffer and StringBuilder?](#73-what-is-the-difference-between-stringbuffer-and-stringbuilder)
 74. [Java: What is the difference between synchronized and non-synchronized collection classes in Java?](#74-what-is-the-difference-between-synchronized-and-non-synchronized-collection-classes-in-java)
+75. [Java: How can we create immutable class in java?]()
+
 
 ## JavaScript
 1. [JavaScript: What is a potential pitfall with using typeof bar === "object" to determine if bar is an object? How can this pitfall be avoided?](#1-what-is-a-potential-pitfall-with-using-typeof-bar--object-to-determine-if-bar-is-an-object-how-can-this-pitfall-be-avoided)
@@ -1953,6 +1955,36 @@ Basically, use the non-synchronized versions, unless you have multiple threads.
 * __Non synchronized__ - It is not-thread safe and can't be shared between many threads without proper synchronization code. 
 * __Synchronized__ - It is thread-safe and can be shared with many threads.
 
+## 75. How can we create immutable class in java?
+
+We can create immutable class as the String class by defining final class and final data members.
+There are many immutable classes like String, Boolean, Byte, Short, Integer, Long, Float, Double etc. In short, all the wrapper classes and String class is immutable. We can also create immutable class by creating final class that have final data members.
+
+## 76. What is a nested class?
+
+Java inner class or nested class is a class which is declared inside the class or interface.
+We use inner classes to logically group classes and interfaces in one place so that it can be more readable and maintainable.
+Additionally, it can access all the members of outer class including private data members and methods.
+
+__Difference between nested class and inner class in Java__
+Inner class is a part of nested class. Non-static nested classes are known as inner classes.
+
+__Types of Nested classes__
+There are two types of nested classes non-static and static nested classes.The non-static nested classes are also known as inner classes.
+
+*Non-static nested class (inner class)
+	* Member inner class
+	* Anonymous inner class
+	* Local inner class
+*Static nested class
+
+|Type			|Description|
+|-----------------------|-----------------|
+|Member Inner Class	|A class created within class and outside method.|
+|Anonymous Inner Class	|A class created for implementing interface or extending class. Its name is decided by the java compiler.|
+|Local Inner Class	|A class created within method.|
+|Static Nested Class	|A static class created within class.|
+|Nested Interface	|An interface created within class or interface.|
 
 ##########################################################################################################################################################################################################################################################
 
