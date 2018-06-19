@@ -126,13 +126,13 @@
 
 ## HR Questions
 
-Why did you choose this university?
-How did you choose your first employer?
-Why are you going to quit from your current job?
-Pitch us your best event idea for TQ
-What kind of technologies are you most interested in and why? 
-Why do you want to work here?  
-Design an email signup form with HTML, CSS, and JS in 30 minutes.
+* Why did you choose this university?
+* How did you choose your first employer?
+* Why are you going to quit from your current job?
+* Pitch us your best event idea for TQ
+* What kind of technologies are you most interested in and why? 
+* Why do you want to work here?  
+* Design an email signup form with HTML, CSS, and JS in 30 minutes.
 
 # Java Part
 
