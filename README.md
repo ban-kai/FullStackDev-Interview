@@ -2134,7 +2134,219 @@ Serializable is a marker interface but Externalizable is not a marker interface.
 
 By InetAddress.getByName("192.18.97.39").getHostName() where 192.18.97.39 is the IP address.
 
-## 83. 
+## 83. What is the difference between a process and a thread?
+
+Both processes and threads are units of concurrency, but they have a fundamental difference: processes do not share a common memory, while threads do.
+
+From the operating system’s point of view, a process is an independent piece of software that runs in its own virtual memory space. Any multitasking operating system (which means almost any modern operating system) has to separate processes in memory so that one failing process wouldn’t drag all other processes down by scrambling common memory.
+
+The processes are thus usually isolated, and they cooperate by the means of inter-process communication which is defined by the operating system as a kind of intermediate API.
+
+On the contrary, a thread is a part of an application that shares a common memory with other threads of the same application. Using common memory allows to shave off lots of overhead, design the threads to cooperate and exchange data between them much faster.
+
+## 84. How can you create a Thread instance and run it?
+To create an instance of a thread, you have two options. First, pass a Runnable instance to its constructor and call start(). Runnable is a functional interface, so it can be passed as a lambda expression:
+
+```java
+Thread thread1 = new Thread(() ->
+  System.out.println("Hello World from Runnable!"));
+thread1.start();
+```
+
+Thread also implements Runnable, so another way of starting a thread is to create an anonymous subclass, override its run() method, and then call start():
+
+```java
+Thread thread2 = new Thread() {
+    @Override
+    public void run() {
+        System.out.println("Hello World from subclass!");
+    }
+};
+thread2.start();
+```
+
+## 85. What is the difference between the Runnable and Callable interfaces? How are they used?
+
+The Runnable interface has a single run method. It represents a unit of computation that has to be run in a separate thread. The Runnable interface does not allow this method to return value or to throw unchecked exceptions.
+
+The Callable interface has a single call method and represents a task that has a value. That’s why the call method returns a value. It can also throw exceptions. Callable is generally used in ExecutorService instances to start an asynchronous task and then call the returned Future instance to get its value.
+
+## 86. What is difference between wait() and sleep() method?
+
+|wait()|sleep()|
+|-------|---|
+|1) The wait() method is defined in Object class.	|The sleep() method is defined in Thread class.|
+|2) wait() method releases the lock.			|The sleep() method doesn't releases the lock.|
+
+## 87. What is the difference between preemptive scheduling and time slicing?
+
+Under preemptive scheduling, the highest priority task executes until it enters the waiting or dead states or a higher priority task comes into existence. Under time slicing, a task executes for a predefined slice of time and then reenters the pool of ready tasks. The scheduler then determines which task should execute next, based on priority and other factors.
+
+## 88. What are daemon threads?
+
+The daemon threads are basically the low priority threads that provides the background support to the user threads. It provides services to the user threads. (Ex: Garbace collector daemon)
+
+Also, a daemon thread is a thread that does not prevent JVM from exiting. When all non-daemon threads are terminated, the JVM simply abandons all remaining daemon threads. Daemon threads are usually used to carry out some supportive or service tasks for other threads, but you should take into account that they may be abandoned at any time.
+
+To start a thread as a daemon, you should use the setDaemon() method before calling start():
+
+```java
+Thread daemon = new Thread(()
+  -> System.out.println("Hello from daemon!"));
+daemon.setDaemon(true);
+daemon.start();
+```
+
+Curiously, if you run this as a part of the main() method, the message might not get printed. This could happen if the main() thread would terminate before the daemon would get to the point of printing the message. You generally should not do any I/O in daemon threads, as they won’t even be able to execute their finally blocks and close the resources if abandoned.
+
+## 89. What are Executor and ExecutorService? What are the differences between these interfaces?
+
+Executor and ExecutorService are two related interfaces of java.util.concurrent framework. Executor is a very simple interface with a single execute method accepting Runnable instances for execution. In most cases, this is the interface that your task-executing code should depend on.
+
+ExecutorService extends the Executor interface with multiple methods for handling and checking the lifecycle of a concurrent task execution service (termination of tasks in case of shutdown) and methods for more complex asynchronous task handling including Futures.
+
+The ExecutorService interface has three standard implementations:
+
+* ThreadPoolExecutor — for executing tasks using a pool of threads. Once a thread is finished executing the task, it goes back into the pool. If all threads in the pool are busy, then the task has to wait for its turn.
+
+* ScheduledThreadPoolExecutor allows to schedule task execution instead of running it immediately when a thread is available. It can also schedule tasks with fixed rate or fixed delay.
+* ForkJoinPool is a special ExecutorService for dealing with recursive algorithms tasks. If you use a regular ThreadPoolExecutor for a recursive algorithm, you will quickly find all your threads are busy waiting for the lower levels of recursion to finish. The ForkJoinPool implements the so-called work-stealing algorithm that allows it to use available threads more efficiently.
+
+
+## 90. What is a volatile field and what guarantees does the JMM hold for such field?
+
+`volatile` has semantics for memory visibility. Basically, the value of a volatile field becomes visible to all readers (other threads in particular) after a write operation completes on it. Without volatile, readers could see some non-updated value.
+
+The effect of the volatile keyword is approximately that each individual read or write operation on that variable is atomic.
+Notably, however, an operation that requires more than one read/write -- such as i++, which is equivalent to i = i + 1, which does one read and one write -- is not atomic, since another thread may write to i between the read and the write.
+
+The Atomic classes, like AtomicInteger and AtomicReference, provide a wider variety of operations atomically, specifically including increment for AtomicInteger.
+
+## 91. What is Atomic Operation in java?
+
+Atomic means each action take place in one step without interruption or we can say that operation is performed as a single unit of work without the possibility of interference from other operations.
+An Atomic operation cannot stop in the middle, either it happened completely or doesn't happen at all.
+
+Java language specification guarantees that:
+* Reading or writing of a variable/reference is atomic unless the variable is of type long or double.
+* Read and write are atomic for all variable declared volatile including long and double variables.
+
+Atomic action can be used without fear of thread interference.
+Using simple atomic variable access is more efficient than accessing the same variable through synchronized code. But it require more  care and attention from programmer to avoid memory consistency .
+Example: __Operation i++__;
+
+This operation is not atomic as it happens in 3 steps
+* Reading the current value of i
+* Increment the current value of i
+* Writing the new value of i
+
+```java
+class Counter {
+  private int count = 0;
+  
+  public void increment() {
+    c++;
+    
+  public void decrement() {
+    c++;
+    
+  public int value() {
+    return c;
+}
+```
+
+Counter class is designed so that invocation of increment() add 1 to the variable c and decrement() subtract 1 from c.
+If Counter object is reference from multiple threads, interference b/w threads may prevent from happening as expected.
+
+Suppose 2 thread are accessing the Counter object
+
+1.Thread A: Retrieve c.
+2.Thread B: Retrieve c.
+3.Thread A: Increment retrieved value; result is 1.
+4.Thread B: Decrement retrieved value; result is -1.
+5.Thread A: Store result in c; c is now 1.
+6.Thread B: Store result in c; c is now -1.
+
+
+Thread A result is lost and overwritten by Thread B.
+Under different circumstances, it might be Thread B result is lost and overwritten by Thread A, or there could be no error.
+
+
+## 92. What is the meaning of a synchronized keyword in the definition of a method? Of a static method? Before a block?
+
+The synchronized keyword before a block means that any thread entering this block has to acquire the monitor (the object in brackets). If the monitor is already acquired by another thread, the former thread will enter the BLOCKED state and wait until the monitor is released.
+
+```java
+synchronized(object) {
+    // ...
+}
+```
+
+A synchronized instance method has the same semantics, but the instance itself acts as a monitor.
+
+```java
+synchronized void instanceMethod() {
+    // ...
+}
+```
+
+For a static synchronized method, the monitor is the Class object representing the declaring class.
+
+```java
+static synchronized void staticMethod() {
+    // ...
+}
+```
+
+## 93. What is the purpose of the wait, notify and notifyAll methods of the Object class?
+
+A thread that owns the object’s monitor (for instance, a thread that has entered a synchronized section guarded by the object) may call object.wait() to temporarily release the monitor and give other threads a chance to acquire the monitor. This may be done, for instance, to wait for a certain condition.
+
+When another thread that acquired the monitor fulfills the condition, it may call object.notify() or object.notifyAll() and release the monitor. The notify method awakes a single thread in the waiting state, and the notifyAll method awakes all threads that wait for this monitor, and they all compete for re-acquiring the lock.
+
+The following BlockingQueue implementation shows how multiple threads work together via the wait-notify pattern. If we put an element into an empty queue, all threads that were waiting in the take method wake up and try to receive the value. If we put an element into a full queue, the put method waits for the call to the get method. The get method removes an element and notifies the threads waiting in the put method that the queue has an empty place for a new item.
+
+```java
+public class BlockingQueue<T> {
+ 
+    private List<T> queue = new LinkedList<T>();
+ 
+    private int limit = 10;
+ 
+    public synchronized void put(T item) {
+        while (queue.size() == limit) {
+            try {
+                wait();
+            } catch (InterruptedException e) {}
+        }
+        if (queue.isEmpty()) {
+            notifyAll();
+        }
+        queue.add(item);
+    }
+ 
+    public synchronized T take() throws InterruptedException {
+        while (queue.isEmpty()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {}
+        }
+        if (queue.size() == limit) {
+            notifyAll();
+        }
+        return queue.remove(0);
+    }
+     
+}
+```
+
+## 94. Describe the conditions of deadlock, livelock, and starvation. Describe the possible causes of these conditions.
+
+Deadlock is a condition within a group of threads that cannot make progress because every thread in the group has to acquire some resource that is already acquired by another thread in the group. The most simple case is when two threads need to lock both of two resources to progress, the first resource is already locked by one thread, and the second by another. These threads will never acquire a lock to both resources and thus will never progress.
+
+Livelock is a case of multiple threads reacting to conditions, or events, generated by themselves. An event occurs in one thread and has to be processed by another thread. During this processing, a new event occurs which has to be processed in the first thread, and so on. Such threads are alive and not blocked, but still, do not make any progress because they overwhelm each other with useless work.
+
+Starvation is a case of a thread unable to acquire resource because other thread (or threads) occupy it for too long or have higher priority. A thread cannot make progress and thus is unable to fulfill useful work.
 
 ##########################################################################################################################################################################################################################################################
 
