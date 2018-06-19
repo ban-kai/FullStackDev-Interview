@@ -76,7 +76,14 @@
 72. [Java: When can an object reference be cast to an interface reference?](#72-when-can-an-object-reference-be-cast-to-an-interface-reference)
 73. [Java: What is the difference between StringBuffer and StringBuilder?](#73-what-is-the-difference-between-stringbuffer-and-stringbuilder)
 74. [Java: What is the difference between synchronized and non-synchronized collection classes in Java?](#74-what-is-the-difference-between-synchronized-and-non-synchronized-collection-classes-in-java)
-75. [Java: How can we create immutable class in java?]()
+75. [Java: How can we create immutable class in java?](#75-how-can-we-create-immutable-class-in-java)
+76. [Java: What is a nested class?](#76-what-is-a-nested-class)
+77. [Java: What is nested interface ?](#77-what-is-nested-interface-)
+78. [Java: Can a class have an interface?](#78-can-a-class-have-an-interface)
+79. [Java: Can an Interface have a class?](#79-can-an-interface-have-a-class)
+80. [Java: What is transient keyword?](#80-what-is-transient-keyword)
+81. [Java: What is the difference between Serializalble and Externalizable interface?](#81-what-is-the-difference-between-serializalble-and-externalizable-interface)
+82. [Java: How do I convert a numeric IP address like 192.18.97.39 into a hostname like java.sun.com?](#82-how-do-i-convert-a-numeric-ip-address-like-192189739-into-a-hostname-like-javasuncom)
 
 
 ## JavaScript
