@@ -123,6 +123,8 @@
 ## Tricky
 
 [How can you swap the values of two numeric variables without using any other variables?]()
+[What is the angle between the clock hands at 4:25?]
+
 
 ## HR Questions
 
@@ -3193,3 +3195,12 @@ a = a + b;
 b = a - b;
 a = a - b;
 ```
+
+## What is the angle between the clock hands at 4:25?
+
+The hour hand rotates 0.5° per minute while the minute hand rotates 6° per minute.
+At exactly four, the hour hand as completed 240 minutes = 120°. Hence angle between minute and hour hand at that point is 120°.
+At 4:25, the minute hand has moved 25 x 6 = 150°. Thus angle between minute hand and 12(on the clock) is 150°.
+But at the same time, even the our hand has moved 0.5 x 25 = 12.5°.
+Now, the angle between the hour hand and 12(on the clock) is 120+12.5=132.5°.
+Now the angle between the two hands of the clock is 150°-132.5° = 17.5° .
